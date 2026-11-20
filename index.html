@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Артур Шатравка — ИТ-специалист полного цикла</title>
+<meta name="description" content="Артур Шатравка — ИТ-специалист из Калининграда. 10 лет в ИТ: инфраструктура, разработка, информационная безопасность, видеонаблюдение. Разбираюсь в бизнес-процессах и довожу их до работающей автоматизации.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Артур Шатравка — ИТ-специалист полного цикла">
+<meta property="og:description" content="10 лет в ИТ. Инфраструктура, разработка, безопасность. Портфолио проектов.">
+<meta name="theme-color" content="#FAFAF7">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2313151A'/%3E%3Ctext x='32' y='45' font-family='Helvetica,Arial,sans-serif' font-size='34' font-weight='700' fill='%23FAFAF7' text-anchor='middle'%3E%D0%A8%3C/text%3E%3C/svg%3E">
+<link rel="preload" as="image" href="assets/photo.jpg" fetchpriority="high">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============ tokens ============ */
+:root{
+  --bg:#FAFAF7;
+  --paper:#FFFFFF;
+  --ink:#13151A;
+  --ink-2:#454B55;
+  --muted:#8A9099;
+  --line:#E5E3DD;
+  --line-2:#D3D0C8;
+  --accent:#1D3FCC;
+  --accent-soft:#EDF0FC;
+  --dark:#0F1116;
+  --dark-2:#171A21;
+  --r:18px;
+  --pad:clamp(20px,5vw,64px);
+  --max:1120px;
+  --font-display:"Inter Tight","Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Consolas,monospace;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--font-body);font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  -webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+::selection{background:var(--accent);color:#fff}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+section{scroll-margin-top:76px}
+
+/* ============ typography ============ */
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:600;letter-spacing:-.02em;line-height:1.08;margin:0}
+.h2{font-size:clamp(1.9rem,4vw,2.9rem);letter-spacing:-.025em}
+.mono{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
+.lead{font-size:clamp(1.02rem,1.6vw,1.2rem);color:var(--ink-2);line-height:1.6}
+.section-head{display:flex;align-items:baseline;gap:18px;margin-bottom:clamp(28px,4vw,52px)}
+.section-head .num{font-family:var(--font-mono);font-size:.72rem;color:var(--muted);letter-spacing:.1em}
+.section-head h2{font-size:clamp(1.9rem,4vw,2.9rem)}
+
+/* ============ nav ============ */
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:#fff;padding:10px 16px;border-radius:8px;z-index:200}
+.skip:focus{left:8px}
+.nav{
+  position:sticky;top:0;z-index:60;
+  background:rgba(250,250,247,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.nav-in{max-width:var(--max);margin:0 auto;padding:0 var(--pad);height:62px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--font-display);font-weight:600;letter-spacing:-.01em;white-space:nowrap}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+.nav-links{display:flex;gap:clamp(12px,2vw,26px);align-items:center}
+.nav-links a{
+  text-decoration:none;color:var(--ink-2);font-family:var(--font-mono);
+  font-size:.68rem;letter-spacing:.09em;text-transform:uppercase;transition:color .2s;
+}
+.nav-links a:hover,.nav-links a.active{color:var(--ink)}
+
+/* ============ hero ============ */
+.hero{padding:clamp(40px,7vw,84px) 0 clamp(28px,4vw,44px)}
+.hero-grid{display:grid;grid-template-columns:1.45fr .85fr;gap:clamp(28px,5vw,64px);align-items:end}
+.kicker{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;color:var(--muted);font-family:var(--font-mono);font-size:.7rem;letter-spacing:.09em;text-transform:uppercase;margin-bottom:22px}
+.kicker .sep{width:3px;height:3px;border-radius:50%;background:var(--line-2)}
+.hero h1{font-size:clamp(2.7rem,7.4vw,4.7rem);letter-spacing:-.04em;line-height:.98}
+.hero .role{
+  margin-top:14px;font-family:var(--font-display);font-weight:500;
+  font-size:clamp(1.15rem,2.2vw,1.55rem);color:var(--ink-2);letter-spacing:-.01em;
+}
+.hero .lead{margin:18px 0 0;max-width:46ch}
+.status{
+  display:inline-flex;align-items:center;gap:9px;margin:26px 0 0;
+  border:1px solid var(--line);background:var(--paper);border-radius:999px;
+  padding:8px 15px;font-size:.8rem;color:var(--ink-2);
+}
+.status .pulse{width:7px;height:7px;border-radius:50%;background:#1E9E62;position:relative;flex:none}
+.status .pulse::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:1px solid #1E9E62;opacity:.35;animation:pulse 2.4s infinite}
+@keyframes pulse{0%,100%{transform:scale(.9);opacity:.35}50%{transform:scale(1.25);opacity:0}}
+@media (prefers-reduced-motion:reduce){.status .pulse::after{animation:none}}
+.cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.btn{
+  display:inline-flex;align-items:center;gap:9px;text-decoration:none;cursor:pointer;
+  padding:13px 22px;border-radius:999px;border:1px solid transparent;
+  font-size:.9rem;font-weight:500;font-family:var(--font-body);
+  transition:transform .18s ease,background .18s,border-color .18s,color .18s;
+}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--ink);color:#fff}
+.btn-primary:hover{background:#000}
+.btn-ghost{background:transparent;border-color:var(--line-2);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--ink);background:var(--paper)}
+.btn svg{width:15px;height:15px;flex:none}
+
+/* photo */
+.photo{position:relative}
+.photo .frame{
+  aspect-ratio:4/5;border-radius:24px;overflow:hidden;background:var(--paper);
+  border:1px solid var(--line);position:relative;
+}
+.ph-mono{
+  position:absolute;inset:0;display:grid;place-items:center;
+  font-family:var(--font-display);font-weight:600;font-size:clamp(3.2rem,9vw,5.4rem);
+  letter-spacing:-.05em;color:#DAD7CE;user-select:none;
+}
+.photo img{position:relative;z-index:1;object-position:50% 28%}
+.photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(.06)}
+.photo .who{
+  position:absolute;left:12px;right:12px;bottom:12px;
+  background:rgba(250,250,247,.92);backdrop-filter:blur(8px);
+  border:1px solid var(--line);border-radius:12px;padding:10px 13px;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+}
+.photo .who b{font-size:.82rem;font-weight:600;display:block;line-height:1.3}
+.photo .who span{font-family:var(--font-mono);font-size:.62rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.photo .who .loc{text-align:right;white-space:nowrap}
+
+/* ============ metrics ============ */
+.metrics{border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:clamp(34px,5vw,56px)}
+.metrics-in{display:grid;grid-template-columns:repeat(4,1fr)}
+.metric{padding:clamp(20px,3vw,30px) 0}
+.metric+.metric{border-left:1px solid var(--line);padding-left:clamp(16px,2.4vw,30px)}
+.metric b{
+  display:block;font-family:var(--font-display);font-weight:600;
+  font-size:clamp(1.5rem,3.2vw,2.15rem);letter-spacing:-.03em;line-height:1;margin-bottom:8px;
+}
+.metric span{font-size:.78rem;color:var(--muted);display:block;line-height:1.35;max-width:18ch}
+
+/* ============ about ============ */
+.about{padding:clamp(56px,8vw,104px) 0}
+.about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,5vw,64px)}
+.about p{margin:0 0 16px;color:var(--ink-2)}
+.about p:last-child{margin-bottom:0}
+.about p strong{color:var(--ink);font-weight:500}
+.skills{border-top:1px solid var(--line)}
+.skill-row{display:grid;grid-template-columns:110px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid var(--line);align-items:start}
+.skill-row dt{font-family:var(--font-mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+.skill-row dd{margin:0;font-size:.92rem;color:var(--ink-2);line-height:1.5}
+.skill-row dd .hot{color:var(--ink);font-weight:500}
+
+/* ============ experience ============ */
+.exp{padding:0 0 clamp(56px,8vw,104px)}
+.timeline{position:relative;margin-top:8px}
+.timeline::before{content:"";position:absolute;left:0;top:6px;bottom:6px;width:1px;background:var(--line)}
+.job{position:relative;padding:0 0 34px 34px}
+.job:last-child{padding-bottom:0}
+.job::before{
+  content:"";position:absolute;left:-4px;top:7px;width:9px;height:9px;border-radius:50%;
+  background:var(--paper);border:1.5px solid var(--line-2);
+}
+.job.current::before{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+.job-top{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 14px;margin-bottom:6px}
+.job-top h3{font-size:clamp(1.05rem,1.8vw,1.25rem);letter-spacing:-.015em}
+.job-top .org{font-size:.9rem;color:var(--accent);font-weight:500}
+.job-top .when{font-family:var(--font-mono);font-size:.68rem;color:var(--muted);letter-spacing:.06em;margin-left:auto;white-space:nowrap}
+.job .where{font-family:var(--font-mono);font-size:.65rem;color:var(--muted);letter-spacing:.07em;text-transform:uppercase;margin-bottom:10px}
+.job ul{margin:0;padding:0;list-style:none}
+.job li{position:relative;padding-left:16px;font-size:.93rem;color:var(--ink-2);margin-bottom:6px;line-height:1.55}
+.job li::before{content:"";position:absolute;left:0;top:.62em;width:5px;height:1px;background:var(--line-2)}
+.job .results{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}
+.pill{
+  display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);
+  background:var(--paper);border-radius:999px;padding:5px 11px;
+  font-family:var(--font-mono);font-size:.63rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2);
+}
+.pill.solid{background:var(--ink);border-color:var(--ink);color:#fff}
+.pill.soft{background:var(--accent-soft);border-color:#DDE3FA;color:var(--accent)}
+
+/* ============ projects ============ */
+.projects{padding:0 0 clamp(56px,8vw,104px)}
+.proj-intro{max-width:60ch;color:var(--ink-2);margin:-18px 0 34px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(16px,2.4vw,26px)}
+.card{
+  background:var(--paper);border:1px solid var(--line);border-radius:var(--r);
+  overflow:hidden;display:flex;flex-direction:column;
+  transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease;
+}
+.card:hover{transform:translateY(-3px);border-color:var(--line-2);box-shadow:0 14px 34px -22px rgba(19,21,26,.4)}
+.card.featured{grid-column:1/-1;flex-direction:row;align-items:stretch}
+.card.featured .shot{width:57%;flex:none;aspect-ratio:auto;border-bottom:0;border-right:1px solid var(--line)}
+.card.featured .card-body{padding:clamp(22px,3vw,38px);justify-content:center}
+.card.featured h3{font-size:clamp(1.25rem,2.4vw,1.6rem)}
+
+.shot{position:relative;aspect-ratio:16/10;background:#EFEEE9;overflow:hidden;border-bottom:1px solid var(--line)}
+.shot img{width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .5s ease}
+.card:hover .shot img{transform:scale(1.02)}
+.shot-fallback{
+  position:absolute;inset:0;display:none;align-items:center;justify-content:center;
+  text-align:center;padding:20px;font-family:var(--font-mono);font-size:.65rem;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+  background:
+    linear-gradient(0deg,rgba(19,21,26,.03),rgba(19,21,26,.03)),
+    repeating-linear-gradient(45deg,transparent 0 8px,rgba(19,21,26,.025) 8px 9px);
+}
+.shot.missing .shot-fallback{display:flex}
+.shot.missing img{display:none}
+
+.card-body{padding:22px;display:flex;flex-direction:column;gap:12px;flex:1}
+.card-meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.card-body h3{font-size:1.12rem;letter-spacing:-.015em;line-height:1.22}
+.card-body p{margin:0;font-size:.9rem;color:var(--ink-2);line-height:1.55}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px}
+.tag{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:3px 7px}
+.card-open{
+  margin-top:0;display:inline-flex;align-items:center;gap:7px;align-self:flex-start;
+  background:none;border:0;padding:0;cursor:pointer;color:var(--ink);
+  font-family:var(--font-mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
+  border-bottom:1px solid var(--line-2);padding-bottom:2px;transition:border-color .2s,gap .2s;
+}
+.card-open:hover{border-color:var(--ink);gap:11px}
+
+.card-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 14px;margin-top:14px}
+.card-links{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}
+.card-link{
+  display:inline-flex;align-items:center;gap:4px;text-decoration:none;
+  font-family:var(--font-mono);font-size:.64rem;letter-spacing:.03em;
+  color:var(--accent);border-bottom:1px solid rgba(29,63,204,.28);
+  padding-bottom:1px;transition:border-color .2s;
+}
+.card-link:hover{border-color:var(--accent)}
+.card-link::after{content:"↗";font-size:.85em;opacity:.75}
+
+/* stat variant (no screenshot) */
+.shot.stat{display:flex;align-items:center;justify-content:center;gap:clamp(14px,3vw,34px);background:var(--ink);border-bottom-color:var(--ink)}
+.shot.stat .s{text-align:center;color:#fff}
+.shot.stat .s b{display:block;font-family:var(--font-display);font-size:clamp(1.4rem,3.4vw,2rem);letter-spacing:-.03em;line-height:1}
+.shot.stat .s span{font-family:var(--font-mono);font-size:.55rem;letter-spacing:.08em;text-transform:uppercase;color:#8D93A0;display:block;margin-top:7px}
+
+/* handle variant (no screenshot, product name) */
+.shot.handle{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:24px;background:var(--ink);border-bottom-color:var(--ink)}
+.shot.handle .h-main{font-family:var(--font-mono);font-size:clamp(1rem,2.6vw,1.45rem);color:#fff;letter-spacing:-.01em;line-height:1.2}
+.shot.handle .h-sub{font-family:var(--font-mono);font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:#8D93A0;text-align:center;line-height:1.6}
+.dlg-body a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(29,63,204,.35)}
+
+/* brand variant (продукт, у которого нет публичного UI-скриншота) */
+.shot.brand{display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#F1EFFF 0%,#E7E4FB 55%,#F7F6FF 100%);border-bottom-color:#E2DEF6}
+.shot.brand .wm{font-family:var(--font-display);font-weight:600;font-size:clamp(1.35rem,3vw,1.9rem);letter-spacing:-.03em;color:#5B48D8;line-height:1}
+.shot.brand .wm span{color:#13151A}
+.shot.brand .sub{font-family:var(--font-mono);font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:#8B84C6;margin-top:10px;text-align:center}
+
+/* beyond */
+.beyond{padding:0 0 clamp(56px,8vw,104px)}
+.beyond-box{
+  border:1px solid var(--line);background:var(--paper);border-radius:var(--r);
+  padding:clamp(24px,4vw,44px);display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(20px,4vw,44px);align-items:center;
+}
+.beyond-box h3{font-size:clamp(1.3rem,2.6vw,1.8rem);margin-bottom:12px}
+.beyond-box p{margin:0;color:var(--ink-2);font-size:.95rem}
+.beyond-list{display:flex;flex-wrap:wrap;gap:8px}
+
+/* ============ contacts (dark) ============ */
+.contacts{background:var(--dark);color:#F4F3EF;padding:clamp(56px,8vw,104px) 0}
+.contacts .wrap{position:relative}
+.contacts .mono{color:#7E8492}
+.contacts h2{font-size:clamp(2rem,4.6vw,3.2rem);letter-spacing:-.03em;margin:10px 0 16px}
+.contacts .lead{color:#A8AEBA;max-width:44ch}
+.contact-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(30px,5vw,64px);align-items:start;margin-top:clamp(30px,4vw,48px)}
+.contact-list{display:flex;flex-direction:column;border-top:1px solid #262A33}
+.contact-row{
+  display:flex;align-items:center;gap:14px;padding:16px 0;border-bottom:1px solid #262A33;
+  text-decoration:none;color:#F4F3EF;transition:color .2s,padding .2s;
+}
+a.contact-row:hover{color:#fff;padding-left:6px}
+.contact-row .ic{width:20px;height:20px;flex:none;color:#7E8492;display:grid;place-items:center}
+.contact-row .ic svg{width:18px;height:18px}
+.contact-row .lbl{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:#7E8492;display:block;line-height:1.4}
+.contact-row .val{font-size:.98rem;line-height:1.4}
+.contact-row .arrow{margin-left:auto;color:#5A6070;transition:transform .2s}
+a.contact-row:hover .arrow{transform:translateX(3px);color:#F4F3EF}
+button.contact-row{background:none;border:0;border-bottom:1px solid #262A33;width:100%;font:inherit;text-align:left;cursor:pointer;padding:16px 0}
+button.contact-row[data-done]{cursor:pointer}
+
+.qr-card{background:#fff;border-radius:20px;padding:20px;color:var(--ink);text-align:center}
+.qr-box{position:relative;aspect-ratio:1;border-radius:12px;overflow:hidden;background:#fff;display:grid;place-items:center}
+.qr-box canvas{width:100%!important;height:100%!important;display:block}
+.qr-box img{display:none!important}
+.qr-note{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-top:14px;line-height:1.6}
+.qr-url{margin-top:6px;font-size:.78rem;color:var(--ink-2);word-break:break-all}
+.qr-actions{display:flex;gap:8px;margin-top:14px;justify-content:center;flex-wrap:wrap}
+.qr-actions button{
+  background:var(--bg);border:1px solid var(--line);border-radius:999px;
+  padding:8px 14px;font-size:.76rem;cursor:pointer;color:var(--ink);
+  font-family:var(--font-body);transition:background .2s,border-color .2s;
+}
+.qr-actions button:hover{background:#fff;border-color:var(--ink)}
+.qr-empty{padding:24px 8px;font-size:.82rem;color:var(--ink-2);line-height:1.6}
+
+/* ============ footer ============ */
+.foot{background:var(--dark);color:#6E7481;border-top:1px solid #262A33;padding:26px 0;font-size:.8rem}
+.foot-in{display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between;align-items:center}
+.foot a{color:#9AA0AC;text-decoration:none}
+.foot a:hover{color:#fff}
+
+/* ============ dialogs ============ */
+dialog{
+  border:0;padding:0;border-radius:20px;max-width:min(780px,calc(100vw - 32px));
+  width:100%;background:var(--paper);color:var(--ink);
+  box-shadow:0 40px 90px -40px rgba(0,0,0,.5);max-height:calc(100vh - 48px);
+}
+dialog::backdrop{background:rgba(15,17,22,.55);backdrop-filter:blur(4px)}
+.dlg-head{padding:clamp(22px,4vw,36px) clamp(22px,4vw,36px) 0;position:relative}
+.dlg-head h3{font-size:clamp(1.3rem,3vw,1.75rem);padding-right:44px;line-height:1.15}
+.dlg-head .card-meta{margin-bottom:12px}
+.dlg-close{
+  position:absolute;right:14px;top:14px;width:38px;height:38px;border-radius:50%;
+  border:1px solid var(--line);background:var(--paper);cursor:pointer;display:grid;place-items:center;color:var(--ink-2);
+  transition:background .2s,color .2s;
+}
+.dlg-close:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.dlg-body{padding:20px clamp(22px,4vw,36px) clamp(24px,4vw,36px);overflow:auto;max-height:calc(100vh - 180px)}
+.dlg-body h4{font-family:var(--font-mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:22px 0 10px}
+.dlg-body h4:first-child{margin-top:0}
+.dlg-body p{margin:0 0 12px;color:var(--ink-2);font-size:.94rem}
+.dlg-body ul{margin:0 0 14px;padding:0;list-style:none}
+.dlg-body li{position:relative;padding-left:18px;color:var(--ink-2);font-size:.94rem;line-height:1.55;margin-bottom:7px}
+.dlg-body li::before{content:"";position:absolute;left:0;top:.7em;width:6px;height:1px;background:var(--accent)}
+.dlg-body img{border-radius:12px;border:1px solid var(--line);margin:8px 0 4px}
+.dlg-body .note{
+  border-left:2px solid var(--accent);background:var(--accent-soft);
+  padding:12px 16px;border-radius:0 10px 10px 0;font-size:.88rem;color:var(--ink-2);margin:16px 0 0;
+}
+.dlg-body .note b{color:var(--ink);font-weight:500}
+
+/* ============ draft marker ============ */
+.ph{
+  border-bottom:1px dashed #C9A227;background:rgba(201,162,39,.12);
+  padding:0 2px;border-radius:2px;
+}
+.draft{
+  position:fixed;left:16px;bottom:16px;z-index:90;max-width:330px;
+  background:#1A1C22;color:#F1EFEA;border-radius:14px;padding:14px 40px 14px 16px;
+  font-size:.78rem;line-height:1.5;box-shadow:0 18px 40px -18px rgba(0,0,0,.6);
+}
+.draft b{color:#E8C97A;font-weight:500}
+.draft button{
+  position:absolute;right:8px;top:8px;width:26px;height:26px;border-radius:50%;
+  border:0;background:#2A2D36;color:#F1EFEA;cursor:pointer;line-height:1;font-size:.9rem;
+}
+
+/* ============ reveal ============ */
+.reveal{opacity:0;transform:translateY(14px)}
+.reveal.in{opacity:1;transform:none;transition:opacity .65s cubic-bezier(.2,.7,.2,1),transform .65s cubic-bezier(.2,.7,.2,1)}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
+
+/* ============ responsive ============ */
+@media (max-width:900px){
+  /* на телефоне: имя → фото → текст, чтобы лицо было на первом экране */
+  .hero-grid{grid-template-columns:1fr;gap:0}
+  .hero-grid > div:first-child{display:contents}
+  .hero .kicker{order:1;margin-bottom:10px}
+  .hero h1{order:2}
+  .hero .role{order:3;margin-top:10px}
+  .photo{order:4;max-width:none;margin:20px 0 0}
+  .hero .lead{order:5}
+  .status{order:6}
+  .cta-row{order:7}
+  .photo .frame{aspect-ratio:4/3;max-height:340px;border-radius:18px}
+  .photo .who{padding:8px 11px}
+  .photo .who .loc{display:none}
+
+  .about-grid,.beyond-box,.contact-grid{grid-template-columns:1fr}
+  .metrics-in{grid-template-columns:repeat(2,1fr)}
+  .metric:nth-child(3){border-left:0;padding-left:0;border-top:1px solid var(--line)}
+  .metric:nth-child(4){border-top:1px solid var(--line)}
+  .card.featured{flex-direction:column}
+  .card.featured .shot{width:100%;aspect-ratio:16/10;border-right:0;border-bottom:1px solid var(--line)}
+}
+@media (max-width:680px){
+  .grid{grid-template-columns:1fr}
+  .job-top .when{margin-left:0;width:100%}
+  .job{padding-left:26px}
+  .skill-row{grid-template-columns:1fr;gap:4px}
+  .foot-in{justify-content:flex-start}
+
+  /* модалка — полноэкранный лист, как в мобильных приложениях */
+  dialog{width:100%;max-width:100%;height:100dvh;max-height:100dvh;border-radius:0;margin:0}
+  dialog[open]{display:flex;flex-direction:column}
+  .dlg-head{flex:none;padding-top:calc(18px + env(safe-area-inset-top))}
+  .dlg-close{width:44px;height:44px;right:12px;top:calc(10px + env(safe-area-inset-top))}
+  .dlg-body{flex:1;min-height:0;max-height:none;overflow:auto;overscroll-behavior:contain;padding-bottom:calc(28px + env(safe-area-inset-bottom))}
+}
+@media (max-width:560px){
+  /* на узких экранах имя в шапке уступает место навигации — h1 в первом экране */
+  .nav-in{justify-content:center}
+  .brand{display:none}
+  .nav-links{gap:14px}
+  .nav-links a{font-size:.62rem;letter-spacing:.06em}
+  .status{border-radius:14px;align-items:flex-start;font-size:.76rem;line-height:1.45}
+  .status .pulse{margin-top:7px}
+}
+@media (pointer:coarse){
+  /* пальцем, а не мышкой: увеличиваем зоны нажатия */
+  .nav-links a{padding:18px 2px}
+  .card-link{padding:9px 0;font-size:.68rem}
+  .card-open{padding:9px 0}
+  .qr-actions button{min-height:44px;padding:10px 16px;font-size:.8rem}
+  .contact-row{padding:18px 0}
+  button.contact-row{padding:18px 0}
+  .status{padding:10px 16px}
+}
+
+/* ============ print ============ */
+@media print{
+  .nav,.draft,.cta-row,.card-open,.qr-actions,.skip{display:none!important}
+  body{background:#fff}
+  .contacts,.foot{background:#fff;color:#000}
+  .contacts h2,.contacts .lead,.contact-row,.contact-row .val{color:#000}
+  .card,.beyond-box{break-inside:avoid;box-shadow:none}
+  .reveal{opacity:1!important;transform:none!important}
+  a{text-decoration:none}
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Перейти к содержанию</a>
+
+<!-- ================= NAV ================= -->
+<header class="nav">
+  <div class="nav-in">
+    <a class="brand" href="#top"><span class="dot"></span><span class="brand-name">Шатравка Артур</span></a>
+    <nav class="nav-links" aria-label="Разделы">
+      <a href="#about">Обо мне</a>
+      <a href="#exp">Опыт</a>
+      <a href="#projects">Проекты</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="kicker">
+          <span>Калининград</span><span class="sep"></span>
+          <span>26 лет</span><span class="sep"></span>
+          <span>10 лет в ИТ</span>
+        </div>
+        <h1>Артур<br>Шатравка</h1>
+        <p class="role">ИТ-специалист полного цикла</p>
+        <p class="lead">
+          Разбираюсь в бизнес-процессах и довожу их до работающей автоматизации:
+          инфраструктура, разработка, информационная безопасность, видеонаблюдение.
+          Не «настроил и ушёл» — остаюсь, пока не начнёт работать.
+        </p>
+        <div class="status">
+          <span class="pulse" aria-hidden="true"></span>
+          Открыт к предложениям — полная занятость или проекты
+        </div>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#projects">
+            Смотреть проекты
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn btn-ghost" href="#contacts">Связаться</a>
+          <!-- Когда будет готов PDF с резюме — положите его в assets/resume.pdf и раскомментируйте:
+          <a class="btn btn-ghost" href="assets/resume.pdf" target="_blank" rel="noopener">Резюме PDF</a>
+          -->
+        </div>
+      </div>
+
+      <div class="photo">
+        <div class="frame">
+          <div class="ph-mono" aria-hidden="true">АШ</div>
+          <img src="assets/photo.jpg" alt="Артур Шатравка" onerror="this.remove()">
+        </div>
+        <div class="who">
+          <div>
+            <b>Артур Шатравка</b>
+            <span>ИТ · безопасность · автоматизация</span>
+          </div>
+          <div class="loc">
+            <b>Калининград</b>
+            <span>МСК+1 · удалённо / гибрид</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="metrics">
+    <div class="wrap metrics-in">
+      <div class="metric"><b>10 лет</b><span>в ИТ — от железа до продакшена</span></div>
+      <div class="metric"><b>2 млн</b><span>пользователей в сети Telegram-ботов</span></div>
+      <div class="metric"><b>10 000</b><span>новых пользователей в день на пике</span></div>
+      <div class="metric"><b>с 18 лет</b><span>преподаю в ИТ-образовании</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="section-head reveal"><span class="num">01</span><h2>Обо мне</h2></div>
+    <div class="about-grid">
+      <div class="reveal">
+        <p>
+          В ИТ десять лет. Начинал в шестнадцать — с компьютеров, касс и видеонаблюдения
+          в сети канцелярских магазинов <strong>«Скрепка»</strong>, где по сути построил
+          технический отдел: сборка и ремонт, торговое оборудование, сайт, присутствие на картах.
+          Сейчас там же собираю аналитику по закупкам и проектирую систему,
+          которая должна закрыть закупки и отчётность.
+        </p>
+        <p>
+          Преподаю с 18 лет: сначала детская школа программирования, затем
+          <strong>Академия ТОП</strong> — информатика, базы данных, Python, защита
+          автоматизированных систем, дипломные проекты. Это научило объяснять сложное
+          просто и держать планку качества.
+        </p>
+        <p>
+          Разрабатываю через ИИ-агентов: понимаю, как устроены модели и где они ошибаются,
+          поэтому не «отправил промпт и жду», а проектирую архитектуру, ставлю задачи,
+          прогоняю результат через собственный пайплайн автоматических проверок и довожу
+          до продакшена. Есть собственные инструменты разработки. До этого писал руками —
+          сеть Telegram-ботов с <strong>2 млн пользователей</strong>.
+        </p>
+        <p>
+          Я не «только разработчик» и не «только админ». Моя сильная сторона — увидеть
+          процесс целиком, найти, где он ломается, и закрыть это технически: от кабеля
+          и сервера до интерфейса и регламента.
+        </p>
+      </div>
+
+      <div class="reveal">
+        <dl class="skills">
+          <div class="skill-row">
+            <dt>Инфраструктура</dt>
+            <dd>Сборка и обслуживание ПК и серверов, Windows, Linux, сети, кассы и торговое оборудование, видеонаблюдение</dd>
+          </div>
+          <div class="skill-row">
+            <dt>Разработка</dt>
+            <dd><span class="hot">Python, TypeScript, Node.js, HTML/CSS</span>, PostgreSQL, MySQL, C#, .NET, C++ (базово)</dd>
+          </div>
+          <div class="skill-row">
+            <dt>Безопасность</dt>
+            <dd>Аудит защищённости, защита автоматизированных систем в защищённом исполнении, нормативные требования</dd>
+          </div>
+          <div class="skill-row">
+            <dt>ИИ-агенты</dt>
+            <dd>Архитектура и постановка задач, собственные инструменты разработки, пайплайн автоматических проверок, локальная транскрипция (Whisper), LLM в обучении</dd>
+          </div>
+          <div class="skill-row">
+            <dt>Процессы</dt>
+            <dd>Анализ и автоматизация бизнес-процессов, постановка задач, преподавание и методика</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EXPERIENCE ================= -->
+<section class="exp" id="exp">
+  <div class="wrap">
+    <div class="section-head reveal"><span class="num">02</span><h2>Опыт работы</h2></div>
+    <div class="timeline reveal">
+
+      <article class="job current">
+        <div class="job-top">
+          <h3>Преподаватель ИТ-дисциплин</h3>
+          <span class="org">Академия ТОП</span>
+          <span class="when">2023 — сейчас</span>
+        </div>
+        <div class="where">Калининград · офлайн и онлайн</div>
+        <ul>
+          <li>Информатика, проектирование и администрирование баз данных, введение в Python, использование автоматизированных систем в защищённом исполнении.</li>
+          <li>Руковожу дипломными проектами: от выбора темы до защиты.</li>
+          <li>Разработал внутреннюю надстройку над цифровым журналом и лекционный помощник — ими пользуются коллеги.</li>
+        </ul>
+        <div class="results">
+          <span class="pill soft">≈100 студентов в год</span>
+          <span class="pill">надстройкой пользуются ≈20 коллег</span>
+        </div>
+      </article>
+
+      <article class="job">
+        <div class="job-top">
+          <h3>Разработчик и администратор</h3>
+          <span class="org">Telegram-проекты</span>
+          <span class="when">2021 — 2023</span>
+        </div>
+        <div class="where">фриланс · удалённо</div>
+        <ul>
+          <li>Сеть развлекательных Telegram-ботов: 2 млн пользователей суммарно.</li>
+          <li>Высоконагруженный вебапп: до 10 000 новых пользователей в день, пик 300 онлайн.</li>
+          <li>Разработка и эксплуатация: код, серверы, мониторинг, поддержка. Всё делал сам, до эры ИИ-агентов.</li>
+          <li>Свой продукт — бот печати стикеров @realstickerbot: приём заказов и программа автоматической раскладки стикеров на лист печати.</li>
+          <li>Проект заморожен: заказчики перестали выходить на связь.</li>
+        </ul>
+        <div class="results">
+          <span class="pill solid">2 млн пользователей</span>
+          <span class="pill">10 000 регистраций в день</span>
+        </div>
+      </article>
+
+      <article class="job">
+        <div class="job-top">
+          <h3>Преподаватель</h3>
+          <span class="org">Школа программирования «Кодабра»</span>
+          <span class="when">2019 — 2021</span>
+        </div>
+        <div class="where">Калининград · работа с детьми</div>
+        <ul>
+          <li>Обучение детей разработке игр: Unity и Scratch, от первых скриптов до готового проекта.</li>
+          <li>Филиал закрылся — причина ухода.</li>
+        </ul>
+      </article>
+
+      <article class="job">
+        <div class="job-top">
+          <h3>Тестировщик</h3>
+          <span class="org">Luxury Games</span>
+          <span class="when">окт — дек 2019</span>
+        </div>
+        <div class="where">геймдев · Калининград</div>
+        <ul>
+          <li>Тестирование игры, поиск и описание багов, проверка исправлений.</li>
+          <li>Студия закрылась — причина ухода.</li>
+        </ul>
+      </article>
+
+      <article class="job">
+        <div class="job-top">
+          <h3>Технический отдел</h3>
+          <span class="org">Сеть магазинов «Скрепка»</span>
+          <span class="when">2016 — сейчас</span>
+        </div>
+        <div class="where">Калининград · параллельно с остальным</div>
+        <ul>
+          <li>Сборка и ремонт компьютеров, обслуживание касс и торговых систем.</li>
+          <li>Видеонаблюдение: подбор, монтаж, настройка.</li>
+          <li>Сайт skrepka-kld.ru: администрирование, наполнение, присутствие на картах.</li>
+          <li>Сейчас собираю аналитику по закупкам и проектирую систему, которая закроет закупки и отчётность.</li>
+        </ul>
+        <div class="results">
+          <span class="pill soft">4 магазина · 6 касс · 24–32 камеры</span>
+          <span class="pill">10 лет технического контура бизнеса</span>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROJECTS ================= -->
+<section class="projects" id="projects">
+  <div class="wrap">
+    <div class="section-head reveal"><span class="num">03</span><h2>Проекты</h2></div>
+    <p class="proj-intro reveal">
+      Семь проектов, которые лучше всего показывают, как я работаю. По каждому видно
+      задачу, мою зону ответственности и результат. Внутренние системы открываю по запросу —
+      покажу на встрече.
+    </p>
+
+    <div class="grid">
+
+      <!-- P1 featured -->
+      <article class="card featured reveal">
+        <figure class="shot">
+          <img src="assets/projects/journal.webp" alt="Интерфейс надстройки над цифровым журналом: расписание на неделю" loading="lazy" decoding="async" onerror="this.parentElement.classList.add('missing');this.remove()">
+          <span class="shot-fallback">Скриншот: расписание в надстройке над журналом</span>
+        </figure>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="pill soft">внутренняя система</span>
+            <span class="pill">2023 — сейчас</span>
+          </div>
+          <h3>Платформа преподавателя: журнал + лекционный помощник</h3>
+          <p>
+            Надстройка над цифровым журналом Академии ТОП, которая снимает рутину
+            с преподавателей: автозаполнение актов, читаемое расписание, кэш и работа
+            при недоступной основной системе. Внутри — лекционный помощник: запись
+            лекции превращается в конспект, презентацию и тест.
+          </p>
+          <div class="tags">
+            <span class="tag">Node.js</span><span class="tag">Python</span>
+            <span class="tag">Whisper</span><span class="tag">LLM</span>
+            <span class="tag">ИИ-агенты</span>
+          </div>
+          <button class="card-open" data-open="p1">Разобрать подробно <span aria-hidden="true">→</span></button>
+        </div>
+      </article>
+
+      <!-- P7 sticker bot (продукт целиком) -->
+      <article class="card reveal">
+        <div class="shot handle" aria-hidden="true">
+          <div class="h-main">@realstickerbot</div>
+          <div class="h-sub">Telegram · бета · перезапуск в этом году</div>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="pill soft">собственный продукт</span>
+            <span class="pill">бета</span>
+          </div>
+          <h3>Стикеры на заказ: бот + раскладка на печать</h3>
+          <p>
+            Бот принимает заказ: присылаешь стикер или фото, выбираешь характеристики.
+            Дальше программа сама раскладывает стикеры на лист печати под нужный формат —
+            и тираж уходит в производство. Весь цикл на мне.
+          </p>
+          <div class="tags">
+            <span class="tag">Python</span><span class="tag">Telegram Bot API</span>
+            <span class="tag">раскладка на печать</span><span class="tag">производство</span>
+          </div>
+          <div class="card-foot">
+            <button class="card-open" data-open="p7">Разобрать подробно <span aria-hidden="true">→</span></button>
+            <span class="card-links">
+              <a class="card-link" href="https://t.me/realstickerbot" target="_blank" rel="noopener">@realstickerbot</a>
+            </span>
+          </div>
+        </div>
+      </article>
+
+      <!-- P2 -->
+      <article class="card reveal">
+        <div class="shot stat" aria-hidden="true">
+          <div class="s"><b>2 млн</b><span>пользователей</span></div>
+          <div class="s"><b>10 000</b><span>в день на пике</span></div>
+          <div class="s"><b>300</b><span>онлайн</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-meta"><span class="pill">2021 — 2023</span></div>
+          <h3>Сеть Telegram-ботов и высоконагруженный вебапп</h3>
+          <p>
+            Развлекательные боты и вебапп с реальной нагрузкой: 10 000 новых
+            пользователей в день и 300 онлайн. Код, серверы, мониторинг — всё сам,
+            до эры ИИ-агентов.
+          </p>
+          <div class="tags">
+            <span class="tag">Python</span><span class="tag">Node.js</span>
+            <span class="tag">Telegram API</span><span class="tag">серверы</span>
+          </div>
+          <button class="card-open" data-open="p2">Разобрать подробно <span aria-hidden="true">→</span></button>
+        </div>
+      </article>
+
+      <!-- P3 -->
+      <article class="card reveal">
+        <div class="shot brand" aria-hidden="true">
+          <div class="wm-wrap">
+            <div class="wm">DENTA<span>.CRM</span></div>
+            <div class="sub">CRM для стоматологий · Балтийск</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="pill soft">работает в 2 клиниках</span>
+            <span class="pill">продажи · внедрение</span>
+          </div>
+          <h3>DENTA.CRM — CRM для стоматологий</h3>
+          <p>
+            Проверка соответствия СанПиН, SMS клиентам с рабочего телефона,
+            всплывающая карточка клиента при входящем звонке. Работает в клиниках
+            «Пиллау Дента» и «Пиллау Дентик» в Балтийске. Я отвечаю за вывод
+            на рынок и внедрение.
+          </p>
+          <div class="tags">
+            <span class="tag">B2B-продажи</span><span class="tag">внедрение</span>
+            <span class="tag">требования</span>
+          </div>
+          <div class="card-foot">
+            <button class="card-open" data-open="p3">Разобрать подробно <span aria-hidden="true">→</span></button>
+            <span class="card-links">
+              <a class="card-link" href="https://dentacrm.technotronika.com" target="_blank" rel="noopener">dentacrm.technotronika.com</a>
+            </span>
+          </div>
+        </div>
+      </article>
+
+      <!-- P4 -->
+      <article class="card reveal">
+        <figure class="shot">
+          <img src="assets/projects/skrepka-site.webp" alt="Сайт сети магазинов «Скрепка»" loading="lazy" onerror="this.parentElement.classList.add('missing');this.remove()">
+          <span class="shot-fallback">Скриншот: skrepka-kld.ru</span>
+        </figure>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="pill">2016 — сейчас</span>
+            <span class="pill">10 лет</span>
+          </div>
+          <h3>«Скрепка»: технический контур бизнеса</h3>
+          <p>
+            Сеть из четырёх канцелярских магазинов: с 16 лет отвечаю за всё, что связано
+            с техникой — от сборки ПК и касс до сайта и видеонаблюдения.
+            Сейчас — аналитика по закупкам и проектирование системы.
+          </p>
+          <div class="tags">
+            <span class="tag">администрирование</span><span class="tag">кассы</span>
+            <span class="tag">видеонаблюдение</span><span class="tag">сайт</span>
+          </div>
+          <div class="card-foot">
+            <button class="card-open" data-open="p4">Разобрать подробно <span aria-hidden="true">→</span></button>
+            <span class="card-links">
+              <a class="card-link" href="https://skrepka-kld.ru" target="_blank" rel="noopener">skrepka-kld.ru</a>
+            </span>
+          </div>
+        </div>
+      </article>
+
+      <!-- P5 -->
+      <article class="card reveal">
+        <figure class="shot">
+          <img src="assets/projects/personal-os.jpg" alt="Прототип Personal OS" loading="lazy" onerror="this.parentElement.classList.add('missing');this.remove()">
+          <span class="shot-fallback">Скриншот: Personal OS (в разработке)</span>
+        </figure>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="pill">в разработке</span>
+            <span class="pill">автор</span>
+          </div>
+          <h3>Personal OS — контекст для ИИ-агентов</h3>
+          <p>
+            Цифровая копия владельца: что есть в физическом мире, сроки годности,
+            напоминания, питание, обслуживание машины. Помощник, который знает
+            контекст, а не переспрашивает.
+          </p>
+          <div class="tags">
+            <span class="tag">ИИ-агенты</span><span class="tag">архитектура</span>
+            <span class="tag">данные</span>
+          </div>
+          <button class="card-open" data-open="p5">Разобрать подробно <span aria-hidden="true">→</span></button>
+        </div>
+      </article>
+
+      <!-- P6 -->
+      <article class="card reveal">
+        <figure class="shot">
+          <img src="assets/projects/shinamobil-site.webp" alt="Сайт выездного шиномонтажа shinamobil39.ru" loading="lazy" onerror="this.parentElement.classList.add('missing');this.remove()">
+          <span class="shot-fallback">Скриншот: shinamobil39.ru</span>
+        </figure>
+        <div class="card-body">
+          <div class="card-meta"><span class="pill">сайты</span></div>
+          <h3>Сайты для локального бизнеса</h3>
+          <p>
+            shinamobil39.ru — выездной шиномонтаж: структура, тексты, вёрстка,
+            SEO, размещение на картах. Плюс сайт «Скрепки» и ещё несколько
+            одностраничников для местного бизнеса.
+          </p>
+          <div class="tags">
+            <span class="tag">HTML/CSS</span><span class="tag">SEO</span>
+            <span class="tag">карты</span>
+          </div>
+          <div class="card-foot">
+            <button class="card-open" data-open="p6">Разобрать подробно <span aria-hidden="true">→</span></button>
+            <span class="card-links">
+              <a class="card-link" href="https://shinamobil39.ru" target="_blank" rel="noopener">shinamobil39.ru</a>
+              <a class="card-link" href="https://skrepka-kld.ru" target="_blank" rel="noopener">skrepka-kld.ru</a>
+            </span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= BEYOND ================= -->
+<section class="beyond">
+  <div class="wrap">
+    <div class="beyond-box reveal">
+      <div>
+        <div class="mono" style="color:var(--muted);margin-bottom:10px">Вне работы</div>
+        <h3>Инженерия руками</h3>
+        <p>
+          Свой гараж: варю рамы для байков, печатаю на 3D-принтере, моделирую
+          и проектирую. То же мышление, что и в коде, только металл не откатишь —
+          поэтому решения проверяю до того, как варить.
+        </p>
+      </div>
+      <div class="beyond-list">
+        <span class="pill">сварка рам</span>
+        <span class="pill">3D-печать</span>
+        <span class="pill">3D-моделирование</span>
+        <span class="pill">проектирование</span>
+        <span class="pill">свой гараж</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACTS ================= -->
+<section class="contacts" id="contacts">
+  <div class="wrap">
+    <div class="mono">04 — Контакты</div>
+    <div class="contact-grid">
+      <div>
+        <h2>Давайте поговорим</h2>
+        <p class="lead">
+          Открыт к полной занятости и проектной работе. Быстрее всего — в Telegram:
+          отвечаю в течение дня. Можно спросить про любой проект — расскажу,
+          что делал и где сломалось.
+        </p>
+
+        <div class="contact-list" style="margin-top:28px">
+          <a class="contact-row" href="https://t.me/otlejal" target="_blank" rel="noopener">
+            <span class="ic" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3 18.9 19c-.2 1-.8 1.2-1.7.8l-4.6-3.4-2.2 2.1c-.25.25-.45.45-.9.45l.3-4.6 8.4-7.6c.4-.35-.1-.55-.6-.2L7.3 12.8 2.9 11.4c-1-.3-1-1 .2-1.4l17.3-6.7c.8-.3 1.5.2 1.5 1z"/></svg>
+            </span>
+            <span>
+              <span class="lbl">Telegram</span>
+              <span class="val">@otlejal</span>
+            </span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+
+          <a class="contact-row" href="mailto:otlejal@yandex.ru">
+            <span class="ic" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 6 9 6.5L21 6"/></svg>
+            </span>
+            <span>
+              <span class="lbl">E-mail</span>
+              <span class="val">otlejal@yandex.ru</span>
+            </span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+
+          <button class="contact-row" id="phoneBtn" data-tel="+7 911 856-24-59" type="button">
+            <span class="ic" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6.5 3.5h3l1.5 4-2 1.5a11 11 0 0 0 5 5l1.5-2 4 1.5v3c0 1.1-.9 2-2 2A16 16 0 0 1 4.5 5.5c0-1.1.9-2 2-2Z"/></svg>
+            </span>
+            <span>
+              <span class="lbl">Телефон</span>
+              <span class="val" id="phoneVal">Показать номер</span>
+            </span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </button>
+
+          <a class="contact-row" href="https://github.com/otlejal" target="_blank" rel="noopener">
+            <span class="ic" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.35 1.09 2.92.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+            </span>
+            <span>
+              <span class="lbl">GitHub</span>
+              <span class="val">github.com/otlejal</span>
+            </span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="qr-card">
+        <div class="qr-box" id="qrBox">
+          <div class="qr-empty" id="qrEmpty">
+            QR-код появится после публикации сайта — он всегда ведёт на текущий адрес.
+          </div>
+        </div>
+        <div class="qr-note">Наведите камеру — сайт откроется у вас</div>
+        <div class="qr-url" id="qrUrl">—</div>
+        <div class="qr-actions">
+          <button type="button" id="copyLink">Скопировать ссылку</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <span>© <span id="year">2026</span> Шатравка Артур · Калининград</span>
+    <span>Сайт собран ИИ-агентами под управлением автора</span>
+    <span>Ctrl + P — сохранить в PDF</span>
+  </div>
+</footer>
+
+<!-- ================= DIALOGS ================= -->
+
+<dialog id="p1" aria-labelledby="p1t">
+  <div class="dlg-head">
+    <div class="card-meta"><span class="pill soft">внутренняя система</span><span class="pill">2023 — сейчас</span></div>
+    <h3 id="p1t">Платформа преподавателя: журнал + лекционный помощник</h3>
+    <button class="dlg-close" data-close aria-label="Закрыть">✕</button>
+  </div>
+  <div class="dlg-body">
+    <h4>Задача</h4>
+    <p>
+      Штатный цифровой журнал Академии ТОП закрывает минимум: расписание нечитаемо,
+      акты в конце месяца преподаватели заполняют вручную, а если основная система
+      недоступна — расписание не посмотреть вообще.
+    </p>
+    <h4>Что сделал</h4>
+    <ul>
+      <li>Надстройка над журналом: автозаполнение актов в конце месяца по данным журнала.</li>
+      <li>Переработанное расписание: вся неделя на одном экране — филиалы, группы, аудитории, статус пары.</li>
+      <li>Кэширование и автономный режим: расписание доступно, даже когда основная система недоступна.</li>
+      <li>Лекционный помощник: запись с микрофона → локальная транскрипция (Whisper) → конспект, презентация и тест по теме через LLM.</li>
+      <li>Всё разработано с ИИ-агентами: архитектура и постановка задач — мои, проверка результата — по собственному пайплайну.</li>
+    </ul>
+    <h4>Результат</h4>
+    <p>
+      Инструментом ежедневно пользуются около 20 коллег. Рутина с актами в конце месяца
+      сократилась с часов до минут. Лекционный помощник снимает с преподавателя
+      подготовку конспекта и теста после каждой пары.
+    </p>
+    <img src="assets/projects/journal.webp" alt="Расписание в надстройке над журналом" onerror="this.remove()">
+    <img src="assets/projects/lecture-helper.webp" alt="Лекционный помощник: запись и распознавание лекции" onerror="this.remove()">
+    <div class="note">
+      <b>Ограничение:</b> система работает внутри контура академии и наружу не выложена
+      по требованиям безопасности. Покажу на встрече — или соберу демо без реальных данных.
+    </div>
+  </div>
+</dialog>
+
+<dialog id="p2" aria-labelledby="p2t">
+  <div class="dlg-head">
+    <div class="card-meta"><span class="pill solid">2 млн пользователей</span><span class="pill">2021 — 2023</span></div>
+    <h3 id="p2t">Сеть Telegram-ботов и высоконагруженный вебапп</h3>
+    <button class="dlg-close" data-close aria-label="Закрыть">✕</button>
+  </div>
+  <div class="dlg-body">
+    <h4>Контекст</h4>
+    <p>
+      Развлекательные Telegram-боты и вебапп на фрилансе. Всё писал сам — до того,
+      как ИИ-агенты стали нормой. Это мой главный аргумент, что я умею работать
+      с реальной нагрузкой и продакшеном, а не только с учебными задачами.
+    </p>
+    <h4>Что делал</h4>
+    <ul>
+      <li>Разработка сети ботов: логика, хранение данных, интеграция с Telegram API.</li>
+      <li>Высоконагруженный вебапп: до 10 000 новых пользователей в день, пик 300 одновременных.</li>
+      <li>Администрирование: серверы, деплой, мониторинг, поддержка пользователей.</li>
+      <li>Суммарно 2 млн пользователей по сети проектов.</li>
+    </ul>
+    <h4>Итог</h4>
+    <p>
+      Проект заморожен: владельцы перестали выходить на связь. Боты не работают,
+      но код и опыт остались — и это честная часть истории, а не то, что нужно прятать.
+    </p>
+    <div class="note">
+      <b>Что показывает:</b> реальную нагрузку, самостоятельную разработку с нуля
+      и полный цикл эксплуатации — от кода до сервера.
+    </div>
+  </div>
+</dialog>
+
+<dialog id="p3" aria-labelledby="p3t">
+  <div class="dlg-head">
+    <div class="card-meta"><span class="pill soft">в продакшене</span><span class="pill">продажи · внедрение</span></div>
+    <h3 id="p3t">DENTA.CRM — CRM для стоматологий</h3>
+    <button class="dlg-close" data-close aria-label="Закрыть">✕</button>
+  </div>
+  <div class="dlg-body">
+    <h4>Что это</h4>
+    <p>CRM для стоматологических клиник с тремя ключевыми особенностями:</p>
+    <ul>
+      <li>проверка соответствия требованиям СанПиН;</li>
+      <li>SMS клиентам прямо с рабочего телефона клиники;</li>
+      <li>при входящем звонке в CRM автоматически открывается карточка клиента.</li>
+    </ul>
+    <h4>Моя роль</h4>
+    <p>
+      Вывод на рынок и внедрение: переговоры с клиниками, демонстрации, запуск,
+      обучение персонала, сбор требований и постановка задач разработчику.
+    </p>
+    <div class="note">
+      <b>Честно:</b> разработку вёл мой партнёр с помощью ИИ-агентов, я не пишу этот код
+      и не выдаю его за свой. Моя ценность здесь — продажи и запуск: понимаю, что болит
+      у клиники, и довожу систему до рабочего состояния.
+    </div>
+    <h4>Результат</h4>
+    <p>Работает в клиниках «Пиллау Дента» и «Пиллау Дентик» (Балтийск). Не пилот и не демо — ежедневная работа.</p>
+    <h4>Ссылка</h4>
+    <p><a href="https://dentacrm.technotronika.com" target="_blank" rel="noopener">dentacrm.technotronika.com</a> — вход в систему.</p>
+  </div>
+</dialog>
+
+<dialog id="p4" aria-labelledby="p4t">
+  <div class="dlg-head">
+    <div class="card-meta"><span class="pill">2016 — сейчас</span><span class="pill">10 лет</span></div>
+    <h3 id="p4t">«Скрепка»: технический контур бизнеса</h3>
+    <button class="dlg-close" data-close aria-label="Закрыть">✕</button>
+  </div>
+  <div class="dlg-body">
+    <h4>Что это</h4>
+    <p>
+      Сеть канцелярских магазинов «Скрепка»: четыре магазина, шесть касс,
+      видеонаблюдение в каждом. С 16 лет отвечаю за всё, что связано
+      с техникой и цифровыми процессами — де-факто это технический отдел компании.
+    </p>
+    <h4>Что делал</h4>
+    <ul>
+      <li>Сборка, ремонт и обслуживание компьютеров.</li>
+      <li>Кассы и торговое ПО: запуск, сопровождение, разбор сбоев.</li>
+      <li>Видеонаблюдение: подбор оборудования, монтаж, настройка.</li>
+      <li>Сайт skrepka-kld.ru: администрирование, наполнение каталога.</li>
+      <li>Присутствие на картах: карточки, фотографии, информация о компании, отзывы.</li>
+      <li>Сейчас: собираю аналитику по закупкам и проектирую систему закупок и отчётности.</li>
+    </ul>
+    <h4>Почему это важно</h4>
+    <p>
+      Это не подработка, а десять лет ответственности за работающий бизнес:
+      если не работает касса — останавливается торговля. Здесь я научился
+      приоритетам: сначала то, что стоит денег, потом красивое.
+    </p>
+    <img src="assets/projects/skrepka-site.webp" alt="Сайт сети магазинов «Скрепка»" loading="lazy" onerror="this.remove()">
+    <h4>Ссылка</h4>
+    <p><a href="https://skrepka-kld.ru" target="_blank" rel="noopener">skrepka-kld.ru</a></p>
+  </div>
+</dialog>
+
+<dialog id="p5" aria-labelledby="p5t">
+  <div class="dlg-head">
+    <div class="card-meta"><span class="pill">в разработке</span><span class="pill">автор</span></div>
+    <h3 id="p5t">Personal OS — контекст для ИИ-агентов</h3>
+    <button class="dlg-close" data-close aria-label="Закрыть">✕</button>
+  </div>
+  <div class="dlg-body">
+    <h4>Идея</h4>
+    <p>
+      ИИ-агенты бесполезны, пока не знают контекста. Personal OS — цифровая копия
+      владельца: что у него есть в физическом мире, что он предпочитает, о чём нужно
+      напомнить. Помощник, который знает, а не переспрашивает.
+    </p>
+    <h4>Что внутри</h4>
+    <ul>
+      <li>Инвентарь вещей и продуктов со сроками годности.</li>
+      <li>Напоминания: что купить, что сделать, что заканчивается.</li>
+      <li>Питание и здоровье: что ел, что стоит съесть.</li>
+      <li>Обслуживание автомобиля: ТО, расходники, сроки.</li>
+      <li>Предпочтения и привычки — как контекст для агентов.</li>
+    </ul>
+    <h4>Статус</h4>
+    <p>
+      В разработке, публичного релиза нет. Показываю архитектуру и текущий прототип —
+      на встрече.
+    </p>
+  </div>
+</dialog>
+
+<dialog id="p7" aria-labelledby="p7t">
+  <div class="dlg-head">
+    <div class="card-meta"><span class="pill soft">собственный продукт</span><span class="pill">бета</span></div>
+    <h3 id="p7t">Стикеры на заказ: бот + раскладка на печать</h3>
+    <button class="dlg-close" data-close aria-label="Закрыть">✕</button>
+  </div>
+  <div class="dlg-body">
+    <h4>Что это</h4>
+    <p>
+      Сервис печати стикеров на заказ. Пользователь присылает боту стикер или фото,
+      выбирает характеристики — и получает физический тираж. Между «хочу стикер»
+      и «стикеры приехали» стоит два инструмента, которые я написал сам.
+    </p>
+    <h4>Что сделал</h4>
+    <ul>
+      <li>Бот на Telegram Bot API: приём заказа, выбор характеристик, статусы, связь с клиентом.</li>
+      <li>Программа автоматической раскладки: считает, сколько стикеров влезает на лист, с учётом характеристик листа, и формирует файл для печати.</li>
+      <li>Цикл «заказ → макет → печать → отправка» без ручной сборки макета.</li>
+    </ul>
+    <h4>Статус</h4>
+    <p>
+      Сейчас бот на паузе. До конца года планирую перезапуск: вебапп и разбор
+      анимированных стикеров — бета уже есть.
+    </p>
+    <p>Бот: <a href="https://t.me/realstickerbot" target="_blank" rel="noopener">@realstickerbot</a></p>
+    <div class="note">
+      <b>Что показывает:</b> продукт целиком — от интерфейса в мессенджере
+      до программы подготовки печати и физического производства.
+    </div>
+  </div>
+</dialog>
+
+<dialog id="p6" aria-labelledby="p6t">
+  <div class="dlg-head">
+    <div class="card-meta"><span class="pill">сайты</span><span class="pill">2016 — сейчас</span></div>
+    <h3 id="p6t">Сайты для локального бизнеса</h3>
+    <button class="dlg-close" data-close aria-label="Закрыть">✕</button>
+  </div>
+  <div class="dlg-body">
+    <h4>shinamobil39.ru</h4>
+    <p>
+      Сайт выездного шиномонтажа в Калининграде: структура, тексты, вёрстка,
+      базовая SEO-настройка, размещение на картах. Задача была простой —
+      чтобы человек с пробитым колесом позвонил с первого экрана.
+    </p>
+    <img src="assets/projects/shinamobil-site.webp" alt="Сайт shinamobil39.ru" loading="lazy" onerror="this.remove()">
+    <h4>skrepka-kld.ru</h4>
+    <p>
+      Сайт сети магазинов «Скрепка»: администрирование, наполнение каталога,
+      карточки на картах, фотографии и информация о компании.
+    </p>
+    <h4>Остальное</h4>
+    <p>
+      Ещё несколько одностраничников для местного бизнеса — их уже и не упомню все.
+      Принцип один: сайт должен приносить звонок, а не быть красивой визиткой.
+    </p>
+    <h4>Ссылки</h4>
+    <p>
+      <a href="https://shinamobil39.ru" target="_blank" rel="noopener">shinamobil39.ru</a> ·
+      <a href="https://skrepka-kld.ru" target="_blank" rel="noopener">skrepka-kld.ru</a>
+    </p>
+  </div>
+</dialog>
+
+<!-- ================= SCRIPTS ================= -->
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- год ---------- */
+  var y = document.getElementById("year");
+  if (y) y.textContent = new Date().getFullYear();
+
+  /* ---------- появление при скролле ---------- */
+  var items = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    items.forEach(function (el) { io.observe(el); });
+  } else {
+    items.forEach(function (el) { el.classList.add("in"); });
+  }
+
+  /* ---------- активный пункт меню ---------- */
+  var sections = ["about", "exp", "projects", "contacts"].map(function (id) { return document.getElementById(id); }).filter(Boolean);
+  var links = Array.prototype.slice.call(document.querySelectorAll(".nav-links a"));
+  if ("IntersectionObserver" in window && sections.length) {
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        links.forEach(function (l) {
+          l.classList.toggle("active", l.getAttribute("href") === "#" + e.target.id);
+        });
+      });
+    }, { rootMargin: "-45% 0px -50% 0px" });
+    sections.forEach(function (s) { spy.observe(s); });
+  }
+
+  /* ---------- диалоги проектов ---------- */
+  var lastFocus = null;
+  document.querySelectorAll("[data-open]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var d = document.getElementById(btn.getAttribute("data-open"));
+      if (!d) return;
+      lastFocus = btn;
+      if (typeof d.showModal === "function") d.showModal(); else d.setAttribute("open", "");
+      document.body.style.overflow = "hidden";
+    });
+  });
+  function closeDialog(d) {
+    if (!d) return;
+    if (typeof d.close === "function") d.close(); else d.removeAttribute("open");
+    document.body.style.overflow = "";
+    if (lastFocus) { lastFocus.focus(); lastFocus = null; }
+  }
+  document.querySelectorAll("dialog").forEach(function (d) {
+    d.addEventListener("click", function (e) {
+      if (e.target === d) closeDialog(d); // клик по фону
+    });
+    d.addEventListener("close", function () { document.body.style.overflow = ""; });
+    var btn = d.querySelector("[data-close]");
+    if (btn) btn.addEventListener("click", function () { closeDialog(d); });
+  });
+
+  /* ---------- телефон ---------- */
+  var phoneBtn = document.getElementById("phoneBtn");
+  var phoneVal = document.getElementById("phoneVal");
+  if (phoneBtn && phoneVal) {
+    phoneBtn.addEventListener("click", function () {
+      var tel = (phoneBtn.getAttribute("data-tel") || "").trim();
+      if (!tel) { phoneVal.textContent = "Добавьте номер в data-tel"; return; }
+      if (!phoneBtn.hasAttribute("data-done")) {
+        phoneVal.textContent = tel;
+        phoneBtn.setAttribute("data-done", "1");
+        phoneBtn.setAttribute("aria-label", "Позвонить: " + tel);
+      } else {
+        window.location.href = "tel:" + tel.replace(/[^\d+]/g, "");
+      }
+    });
+  }
+
+  /* ---------- ссылка для QR ---------- */
+  var qrUrl = document.getElementById("qrUrl");
+  var url = location.href.split("#")[0];
+  var isFile = location.protocol === "file:";
+  if (qrUrl) qrUrl.textContent = isFile ? "локальный файл — опубликуйте сайт" : url.replace(/^https?:\/\//, "");
+
+  /* ---------- копировать ссылку ---------- */
+  var copyBtn = document.getElementById("copyLink");
+  if (copyBtn) {
+    copyBtn.addEventListener("click", function () {
+      var text = url;
+      var done = function () {
+        var old = copyBtn.textContent;
+        copyBtn.textContent = "Скопировано";
+        setTimeout(function () { copyBtn.textContent = old; }, 1600);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done).catch(fallback);
+      } else { fallback(); }
+      function fallback() {
+        var ta = document.createElement("textarea");
+        ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand("copy"); done(); } catch (e) { alert(text); }
+        document.body.removeChild(ta);
+      }
+    });
+  }
+})();
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+  /* QR строится из текущего адреса страницы, поэтому всегда ведёт на сам сайт */
+  (function () {
+    var box = document.getElementById("qrBox");
+    if (!box || location.protocol === "file:") return;
+
+    var url = location.href.split("#")[0];
+    var empty = document.getElementById("qrEmpty");
+
+    function fail() {
+      if (empty) empty.textContent = "QR не построился. Ссылка: " + url;
+    }
+
+    if (typeof QRCode === "undefined") { fail(); return; }
+
+    try {
+      box.innerHTML = "";
+      new QRCode(box, {
+        text: url,
+        width: 440,
+        height: 440,
+        colorDark: "#13151A",
+        colorLight: "#FFFFFF",
+        correctLevel: QRCode.CorrectLevel.M
+      });
+      var c = box.querySelector("canvas");
+      if (c) {
+        c.setAttribute("role", "img");
+        c.setAttribute("aria-label", "QR-код со ссылкой на этот сайт");
+      }
+    } catch (e) { fail(); }
+  })();
+</script>
+
+</body>
+</html>
