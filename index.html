@@ -13,7 +13,8 @@
 <link rel="preload" as="image" href="assets/photo.jpg" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
 <style>
 /* ============ tokens ============ */
 :root{
@@ -76,6 +77,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:600;letter-spacing:-.02e
 .nav-links a{
   text-decoration:none;color:var(--ink-2);font-family:var(--font-mono);
   font-size:.68rem;letter-spacing:.09em;text-transform:uppercase;transition:color .2s;
+  padding:20px 2px;
 }
 .nav-links a:hover,.nav-links a.active{color:var(--ink)}
 
@@ -127,13 +129,13 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:600;letter-spacing:-.02e
 .photo img{position:relative;z-index:1;object-position:50% 28%}
 .photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(.06)}
 .photo .who{
-  position:absolute;left:12px;right:12px;bottom:12px;
+  position:absolute;left:12px;right:12px;bottom:12px;z-index:2;
   background:rgba(250,250,247,.92);backdrop-filter:blur(8px);
   border:1px solid var(--line);border-radius:12px;padding:10px 13px;
   display:flex;align-items:center;justify-content:space-between;gap:10px;
 }
 .photo .who b{font-size:.82rem;font-weight:600;display:block;line-height:1.3}
-.photo .who span{font-family:var(--font-mono);font-size:.62rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.photo .who span{font-family:var(--font-mono);font-size:.62rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
 .photo .who .loc{text-align:right;white-space:nowrap}
 
 /* ============ metrics ============ */
@@ -202,7 +204,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:600;letter-spacing:-.02e
 .card.featured .card-body{padding:clamp(22px,3vw,38px);justify-content:center}
 .card.featured h3{font-size:clamp(1.25rem,2.4vw,1.6rem)}
 
-.shot{position:relative;aspect-ratio:16/10;background:#EFEEE9;overflow:hidden;border-bottom:1px solid var(--line)}
+.shot{position:relative;aspect-ratio:16/10;background:#EFEEE9;overflow:hidden;border-bottom:1px solid var(--line);margin:0}
 .shot img{width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .5s ease}
 .card:hover .shot img{transform:scale(1.02)}
 .shot-fallback{
@@ -226,7 +228,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:600;letter-spacing:-.02e
   margin-top:0;display:inline-flex;align-items:center;gap:7px;align-self:flex-start;
   background:none;border:0;padding:0;cursor:pointer;color:var(--ink);
   font-family:var(--font-mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
-  border-bottom:1px solid var(--line-2);padding-bottom:2px;transition:border-color .2s,gap .2s;
+  border-bottom:1px solid var(--line-2);padding:6px 0 4px;transition:border-color .2s,gap .2s;
 }
 .card-open:hover{border-color:var(--ink);gap:11px}
 
@@ -236,7 +238,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:600;letter-spacing:-.02e
   display:inline-flex;align-items:center;gap:4px;text-decoration:none;
   font-family:var(--font-mono);font-size:.64rem;letter-spacing:.03em;
   color:var(--accent);border-bottom:1px solid rgba(29,63,204,.28);
-  padding-bottom:1px;transition:border-color .2s;
+  padding:6px 0 4px;transition:border-color .2s;
 }
 .card-link:hover{border-color:var(--accent)}
 .card-link::after{content:"↗";font-size:.85em;opacity:.75}
@@ -293,8 +295,8 @@ button.contact-row[data-done]{cursor:pointer}
 
 .qr-card{background:#fff;border-radius:20px;padding:20px;color:var(--ink);text-align:center}
 .qr-box{position:relative;aspect-ratio:1;border-radius:12px;overflow:hidden;background:#fff;display:grid;place-items:center}
-.qr-box canvas{width:100%!important;height:100%!important;display:block}
-.qr-box img{display:none!important}
+.qr-box img{width:100%!important;height:100%!important;display:block!important;object-fit:contain;image-rendering:pixelated}
+.qr-box canvas{display:none!important}
 .qr-note{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-top:14px;line-height:1.6}
 .qr-url{margin-top:6px;font-size:.78rem;color:var(--ink-2);word-break:break-all}
 .qr-actions{display:flex;gap:8px;margin-top:14px;justify-content:center;flex-wrap:wrap}
@@ -411,9 +413,8 @@ dialog::backdrop{background:rgba(15,17,22,.55);backdrop-filter:blur(4px)}
 }
 @media (pointer:coarse){
   /* пальцем, а не мышкой: увеличиваем зоны нажатия */
-  .nav-links a{padding:18px 2px}
-  .card-link{padding:9px 0;font-size:.68rem}
-  .card-open{padding:9px 0}
+  .card-link{padding:9px 0;font-size:.68rem;min-height:44px;align-items:center}
+  .card-open{padding:9px 0;min-height:44px}
   .qr-actions button{min-height:44px;padding:10px 16px;font-size:.8rem}
   .contact-row{padding:18px 0}
   button.contact-row{padding:18px 0}
@@ -492,11 +493,11 @@ dialog::backdrop{background:rgba(15,17,22,.55);backdrop-filter:blur(4px)}
         <div class="who">
           <div>
             <b>Артур Шатравка</b>
-            <span>ИТ · безопасность · автоматизация</span>
+            <span>ИТ-специалист</span>
           </div>
           <div class="loc">
             <b>Калининград</b>
-            <span>МСК+1 · удалённо / гибрид</span>
+            <span>МСК+1</span>
           </div>
         </div>
       </div>
@@ -824,8 +825,7 @@ dialog::backdrop{background:rgba(15,17,22,.55);backdrop-filter:blur(4px)}
 
       <!-- P5 -->
       <article class="card reveal">
-        <figure class="shot">
-          <img src="assets/projects/personal-os.jpg" alt="Прототип Personal OS" loading="lazy" onerror="this.parentElement.classList.add('missing');this.remove()">
+        <figure class="shot missing">
           <span class="shot-fallback">Скриншот: Personal OS (в разработке)</span>
         </figure>
         <div class="card-body">
@@ -1358,6 +1358,12 @@ dialog::backdrop{background:rgba(15,17,22,.55);backdrop-filter:blur(4px)}
       if (c) {
         c.setAttribute("role", "img");
         c.setAttribute("aria-label", "QR-код со ссылкой на этот сайт");
+      }
+      var im = box.querySelector("img");
+      if (im) {
+        im.setAttribute("role", "img");
+        im.setAttribute("aria-label", "QR-код со ссылкой на этот сайт");
+        im.setAttribute("alt", "QR-код со ссылкой на этот сайт");
       }
     } catch (e) { fail(); }
   })();
