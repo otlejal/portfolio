@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Артур Шатравка — ИТ-специалист полного цикла</title>
 <meta name="description" content="Резюме Артура Шатравки в виде переписки. 10 лет в ИТ: инфраструктура, разработка, информационная безопасность, видеонаблюдение. Калининград.">
-<meta name="theme-color" content="#FAFAF7" id="themeColor">
+<meta name="theme-color" content="#DDE5F3" id="themeColor">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Артур Шатравка — ИТ-специалист полного цикла">
 <meta property="og:description" content="Резюме в виде переписки: 10 лет в ИТ, от кабеля до продакшена.">
@@ -181,10 +181,6 @@ a{color:inherit}
   box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 0 0 1px var(--accent-border) inset;
 }
 
-.count{
-  font-family:var(--font-mono);font-size:.56rem;letter-spacing:.06em;
-  color:var(--muted);white-space:nowrap;padding-left:10px;border-left:1px solid var(--line);
-}
 .hd-btn,.theme-btn{
   border:1px solid var(--glass-brd);color:var(--ink-2);cursor:pointer;
   background-color:var(--glass);background-image:var(--sheen);
@@ -206,8 +202,13 @@ a{color:inherit}
 :root[data-theme="light"] .tm-moon{display:block}
 :root[data-theme="dark"] .tm-sun{display:block}
 
-.bar{position:absolute;left:16px;right:16px;bottom:6px;height:2px;border-radius:2px;background:var(--line);overflow:hidden}
-.bar i{display:block;height:100%;width:0;border-radius:2px;background:var(--accent);transition:width .12s linear}
+.bar{position:absolute;left:16px;right:16px;bottom:6px;height:2px;border-radius:2px;background:transparent;pointer-events:none}
+.bar i{display:block;height:100%;width:0;border-radius:2px;background:var(--accent);box-shadow:0 0 10px -2px var(--accent);transition:width .12s linear}
+
+/* measuring pass: invisible, used to know the final page height */
+.measuring [data-seq]:not(.started){display:flex!important}
+.measuring .chapter:not(.in){display:flex!important}
+.measuring .composer,.measuring .foot{display:block!important}
 
 /* ============ thread ============ */
 .thread{padding:clamp(20px,4vw,34px) 0 0}
@@ -240,6 +241,10 @@ a{color:inherit}
 }
 .stack{display:flex;flex-direction:column;gap:6px;max-width:min(100%,540px);min-width:0;position:relative}
 .group.v .stack{align-items:flex-end}
+
+/* progressive feed: unrevealed steps do not exist in the flow */
+.js [data-seq]:not(.started){display:none}
+.js .chapter:not(.in){display:none}
 
 /* glass message */
 .msg{
@@ -290,7 +295,8 @@ a{color:inherit}
 .handlebox span{display:block;font-family:var(--font-mono);font-size:.5rem;letter-spacing:.13em;text-transform:uppercase;color:var(--handle-sub);margin-top:8px}
 
 /* contact card */
-.pc{display:flex;align-items:center;gap:14px;padding:8px 6px}
+.pc{padding:6px 6px 4px}
+.pc-top{display:flex;align-items:center;gap:14px}
 .pc img{
   width:84px;height:84px;border-radius:50%;object-fit:cover;object-position:50% 20%;
   flex:none;border:1px solid var(--glass-brd);background:var(--img-bg);
@@ -299,6 +305,21 @@ a{color:inherit}
 .pc-txt b{display:block;font-family:var(--font-display);font-weight:600;font-size:1.04rem;letter-spacing:-.02em;line-height:1.2}
 .pc-txt span{display:block;font-size:.85rem;color:var(--ink-2);margin-top:3px}
 .pc-txt .pc-m{font-family:var(--font-mono);font-size:.52rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-top:8px;line-height:1.5}
+.pc-contacts{border-top:1px solid var(--line);margin-top:12px;padding-top:4px}
+.pc-row{
+  display:flex;align-items:center;gap:10px;padding:8px 4px;border-radius:9px;
+  text-decoration:none;color:inherit;transition:background-color .18s,padding .18s;
+}
+.pc-row:hover{background-color:var(--accent-soft)}
+.pc-row:active{background-color:var(--accent-soft)}
+.pc-k{
+  flex:none;width:70px;font-family:var(--font-mono);font-size:.52rem;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--muted);line-height:1.4;
+}
+.pc-v{font-size:.85rem;color:var(--ink);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pc-a{margin-left:auto;flex:none;color:var(--muted);font-size:.8rem;transition:transform .2s,color .2s}
+.pc-row:hover .pc-a{transform:translate(2px,-2px);color:var(--accent)}
+.msg.a .pc-row{color:inherit;border-bottom:0}
 
 /* stats */
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:3px 2px 1px}
@@ -404,6 +425,8 @@ body.all .rv{opacity:1!important;transform:none!important;transition:none!import
 }
 
 /* composer */
+.composer,.foot{display:none}
+body.complete .composer,body.complete .foot{display:block}
 .composer{max-width:var(--max);margin:clamp(38px,6vw,56px) auto 0;padding:0 var(--pad)}
 .box{
   display:flex;align-items:flex-end;gap:8px;
@@ -490,11 +513,11 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
 
 /* ============ responsive ============ */
 @media (max-width:900px){
-  .count{display:none}
+  .hd-btn{margin-left:auto}
 }
 @media (max-width:780px){
   .chapters{display:none}
-  .hd-btn{margin-left:auto}
+  .hd-btn{margin-left:0}
 }
 @media (max-width:680px){
   .hd{padding:8px var(--pad) 0}
@@ -504,7 +527,6 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
   .hd-status{font-size:.6rem;letter-spacing:.06em}
   .hd-btn{font-size:.68rem;padding:7px 10px}
   .theme-btn{width:34px;height:34px}
-  .bar{left:12px;right:12px;bottom:5px}
   .stack{max-width:100%}
   .msg{font-size:.93rem;backdrop-filter:blur(14px) saturate(170%);-webkit-backdrop-filter:blur(14px) saturate(170%)}
   .ind-dots,.ind-file,.box,.hd-in,.chapter span{backdrop-filter:blur(14px) saturate(170%);-webkit-backdrop-filter:blur(14px) saturate(170%)}
@@ -537,6 +559,8 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
   .rv{opacity:1!important;transform:none!important}
   .group[data-seq] .msg,.group[data-seq] .ava{opacity:1!important;transform:none!important}
   .group.first .msg{animation:none}
+  .js [data-seq]:not(.started){display:flex!important}
+  .js .chapter:not(.in){display:flex!important}
   .thread{padding-top:0}
   .thread-in{max-width:100%;padding:0}
   .thread-in::before,.thread-in::after{display:none}
@@ -563,6 +587,7 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
   .brandbox{background:none!important;padding:0!important}
   .msg.attach .pc{border:1px solid #ddd;border-radius:8px;padding:10px 12px}
   .msg.attach .pc img{width:56px;height:56px}
+  .pc-a{display:none}
   .chapter{color:#000;margin:24px 0 12px;justify-content:flex-start}
   .chapter span{background:none;border:0;box-shadow:none;padding:0}
   .chapter::before,.chapter::after{background:#ccc}
@@ -576,6 +601,7 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
 /* тема до первой отрисовки — без вспышки */
 (function () {
   var d = document.documentElement, stored = null;
+  d.className += " js";
   try { stored = localStorage.getItem("theme"); } catch (e) {}
   var t;
   if (stored === "light" || stored === "dark") t = stored;
@@ -583,7 +609,7 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
   else t = "light";
   d.setAttribute("data-theme", t);
   var m = document.getElementById("themeColor");
-  if (m) m.setAttribute("content", t === "dark" ? "#07080C" : "#E9EDF6");
+  if (m) m.setAttribute("content", t === "dark" ? "#06070A" : "#DDE5F3");
 })();
 </script>
 </head>
@@ -610,13 +636,12 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
       <a href="#now">сейчас</a>
     </nav>
 
-    <span class="count" id="count" aria-hidden="true">0 / 30</span>
     <button class="hd-btn" id="showAll" type="button">Показать всё</button>
-    <button class="theme-btn" id="themeBtn" type="button" aria-label="Тема: авто" title="Тема: авто">
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="Включить тёмную тему" title="Включить тёмную тему">
       <svg class="tm-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4l1.4-1.4M18 6l1.4-1.4"></path></svg>
       <svg class="tm-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1Z"></path></svg>
     </button>
-    <div class="bar" aria-hidden="true"><i id="bar"></i></div>
+    <div class="bar" role="progressbar" aria-label="Прогресс переписки" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="bar"></i></div>
   </div>
 </header>
 
@@ -624,14 +649,9 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
 <div class="thread" id="top">
   <div class="thread-in">
 
-    <p class="frame">
-      <b>Переписка</b>
-      Вопросы справа — то, что обычно спрашивают на собеседовании. Ответы — мои.
-    </p>
-
     <div class="group v first">
       <div class="stack">
-        <div class="msg v"><p>Привет. Коротко: кто ты и чем можешь быть полезен?</p></div>
+        <div class="msg v"><p>Привет. Ты правда можешь вести весь бизнес, а также закрывать и инфраструктуру, и разработку, и безопасность?</p></div>
       </div>
     </div>
 
@@ -640,32 +660,43 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
       <div class="stack">
         <div class="msg a">
           <p>Привет. Я Артур Шатравка — ИТ-специалист полного цикла. Калининград, 26 лет, в ИТ десять лет.</p>
-          <p>Ниже — короткая переписка о том, что я умею и как работаю. Можно листать, можно открывать кейсы.</p>
         </div>
         <div class="msg a attach" data-send="контакт">
           <div class="pc">
-            <img src="assets/photo.jpg" alt="Артур Шатравка" width="84" height="84">
-            <div class="pc-txt">
-              <b>Артур Шатравка</b>
-              <span>ИТ-специалист полного цикла</span>
-              <span class="pc-m">Калининград · МСК+1<br>полная занятость или проекты</span>
+            <div class="pc-top">
+              <img src="assets/photo.jpg" alt="Артур Шатравка" width="84" height="84">
+              <div class="pc-txt">
+                <b>Артур Шатравка</b>
+                <span>ИТ-специалист полного цикла</span>
+                <span class="pc-m">Калининград · МСК+1<br>полная занятость или проекты</span>
+              </div>
+            </div>
+            <div class="pc-contacts">
+              <a class="pc-row" href="https://t.me/otlejal" target="_blank" rel="noopener">
+                <span class="pc-k">Telegram</span>
+                <span class="pc-v">@otlejal</span>
+                <span class="pc-a" aria-hidden="true">↗</span>
+              </a>
+              <a class="pc-row" href="mailto:otlejal@yandex.ru">
+                <span class="pc-k">E-mail</span>
+                <span class="pc-v">otlejal@yandex.ru</span>
+                <span class="pc-a" aria-hidden="true">↗</span>
+              </a>
+              <a class="pc-row" href="tel:+79118562459">
+                <span class="pc-k">Телефон</span>
+                <span class="pc-v">+7 911 856-24-59</span>
+                <span class="pc-a" aria-hidden="true">↗</span>
+              </a>
+              <a class="pc-row" href="https://github.com/otlejal" target="_blank" rel="noopener">
+                <span class="pc-k">GitHub</span>
+                <span class="pc-v">github.com/otlejal</span>
+                <span class="pc-a" aria-hidden="true">↗</span>
+              </a>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-
-    <div class="group v" data-seq>
-      <div class="stack">
-        <div class="msg v"><p>Полного цикла — это как?</p></div>
-      </div>
-    </div>
-
-    <div class="group a" data-seq>
-      <img class="ava" src="assets/photo.jpg" alt="" width="34" height="34">
-      <div class="stack">
         <div class="msg a">
-          <p>От кабеля и сервера до интерфейса и регламента. Обычно на такую задачу берут трёх человек: админа, разработчика и безопасника. Я закрываю весь контур и отвечаю за результат целиком.</p>
+          <p>Да. От кабеля и сервера до интерфейса и регламента. Обычно на такую задачу берут трёх человек: админа, разработчика и безопасника. Я закрываю весь контур и отвечаю за результат целиком.</p>
           <div class="chips">
             <span class="chip">инфраструктура</span>
             <span class="chip">разработка</span>
@@ -680,7 +711,7 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
       </div>
     </div>
 
-    <h2 class="chapter" id="y2016"><span>2016</span></h2>
+    <h2 class="chapter rv" id="y2016"><span>2016</span></h2>
 
     <div class="group v" data-seq>
       <div class="stack">
@@ -728,7 +759,7 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
       </div>
     </div>
 
-    <h2 class="chapter" id="y2019"><span>2019</span></h2>
+    <h2 class="chapter rv" id="y2019"><span>2019</span></h2>
 
     <div class="group v" data-seq>
       <div class="stack">
@@ -749,7 +780,7 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
       </div>
     </div>
 
-    <h2 class="chapter" id="y2021"><span>2021</span></h2>
+    <h2 class="chapter rv" id="y2021"><span>2021</span></h2>
 
     <div class="group v" data-seq>
       <div class="stack">
@@ -812,7 +843,7 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
       </div>
     </div>
 
-    <h2 class="chapter" id="y2023"><span>2023</span></h2>
+    <h2 class="chapter rv" id="y2023"><span>2023</span></h2>
 
     <div class="group v" data-seq>
       <div class="stack">
@@ -857,7 +888,7 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
       </div>
     </div>
 
-    <h2 class="chapter" id="now"><span>Сейчас</span></h2>
+    <h2 class="chapter rv" id="now"><span>Сейчас</span></h2>
 
     <div class="group v" data-seq>
       <div class="stack">
@@ -1200,23 +1231,30 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
 
   /* ---------- последовательная выдача сообщений ---------- */
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var seqGroups = [].slice.call(document.querySelectorAll("[data-seq]"));
-  var totalMsgs = document.querySelectorAll(".msg").length;
-  var seqMsgs = document.querySelectorAll("[data-seq] .msg").length;
-  var shown = totalMsgs - seqMsgs;
-  var counter = document.getElementById("count");
+  var steps = [].slice.call(document.querySelectorAll("[data-seq], .chapter"));
+  var bar = document.getElementById("bar");
+  var barWrap = bar ? bar.parentNode : null;
+  var busy = false;
+  var lastReveal = 0;
+  var suppressUntil = 0;
+  var finalHeight = 0;
 
   var DOTS = '<span class="ind-dots"><i></i><i></i><i></i></span>';
   var FILE_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5"/></svg>';
 
-  function updateCounter() {
-    if (counter) counter.textContent = shown + " / " + totalMsgs;
+  function paintProgress() {
+    if (!bar) return;
+    var max = Math.max(0, finalHeight - window.innerHeight);
+    var p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+    bar.style.width = (p * 100).toFixed(2) + "%";
+    if (barWrap) barWrap.setAttribute("aria-valuenow", String(Math.round(p * 100)));
   }
-  updateCounter();
 
-  function bump(n) {
-    shown += n;
-    updateCounter();
+  function measureFinal() {
+    document.body.classList.add("measuring");
+    finalHeight = document.documentElement.scrollHeight;
+    document.body.classList.remove("measuring");
+    paintProgress();
   }
 
   function makeIndicator(stack) {
@@ -1234,24 +1272,24 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
   }
 
   function revealAll(g) {
+    g.classList.add("started");
     var msgs = g.querySelectorAll(".msg");
     for (var i = 0; i < msgs.length; i++) msgs[i].classList.add("on");
     g.classList.add("live");
-    bump(msgs.length);
   }
 
-  function seqGroup(g, fast, done) {
-    if (g.dataset.done) { done(); return; }
+  function seqGroup(g, done) {
+    if (g.dataset.done === "1") { done(); return; }
     g.dataset.done = "1";
+    g.classList.add("started");
 
     var stack = g.querySelector(".stack");
     if (!stack) { done(); return; }
     var msgs = [].slice.call(stack.querySelectorAll(".msg"));
     var fromArtur = g.classList.contains("a");
     var isIntro = g.id === "boot";
-    var deep = g.dataset.deep === "1";
 
-    if (reduce || !fromArtur || (deep && !isIntro) || (fast && !isIntro)) {
+    if (reduce || !fromArtur) {
       revealAll(g);
       done();
       return;
@@ -1265,10 +1303,15 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
       ind.classList.add("show");
       setTimeout(function () {
         ind.classList.remove("show");
-        revealAll(g);
-        dropIndicator(ind, 280);
-        done();
-      }, reduce ? 0 : 520);
+        var k = 0;
+        (function next() {
+          if (k >= msgs.length) { dropIndicator(ind, 220); done(); return; }
+          msgs[k].classList.add("on");
+          g.classList.add("live");
+          k++;
+          setTimeout(next, k === 1 ? 200 : 150);
+        })();
+      }, reduce ? 0 : 240);
       return;
     }
 
@@ -1296,7 +1339,6 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
         ind.classList.remove("show");
         m.classList.add("on");
         g.classList.add("live");
-        bump(1);
         i++;
         setTimeout(step, isFile ? 160 : 240);
       }, wait);
@@ -1304,75 +1346,163 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
     step();
   }
 
-  var running = false;
-
-  function revealBefore(idx) {
-    for (var k = 0; k < idx; k++) {
-      var g = seqGroups[k];
-      if (g.dataset.done === "1") continue;
-      g.dataset.hit = "1";
-      g.dataset.done = "1";
-      revealAll(g);
-      var ind = g.querySelector(".ind");
-      if (ind && ind.parentNode) ind.parentNode.removeChild(ind);
+  function firstPending() {
+    for (var i = 0; i < steps.length; i++) {
+      if (steps[i].dataset.done !== "1") return i;
     }
+    return -1;
   }
 
-  function pump() {
-    if (running) return;
-    var idx = -1, i, j;
-    for (i = 0; i < seqGroups.length; i++) {
-      if (seqGroups[i].dataset.hit === "1" && seqGroups[i].dataset.done !== "1") { idx = i; break; }
+  function checkComplete() {
+    if (firstPending() < 0) document.body.classList.add("complete");
+  }
+
+  function nextStep() {
+    if (busy) return;
+    var idx = firstPending();
+    if (idx < 0) { checkComplete(); return; }
+    var el = steps[idx];
+
+    if (el.classList.contains("chapter")) {
+      el.dataset.done = "1";
+      el.classList.add("in");
+      setTimeout(maybeFill, 60);
+      return;
     }
-    if (idx < 0) return;
 
-    revealBefore(idx);
-
-    var backlog = 0;
-    for (j = idx + 1; j < seqGroups.length; j++) {
-      if (seqGroups[j].dataset.hit === "1") backlog++;
-    }
-
-    running = true;
-    seqGroup(seqGroups[idx], backlog > 0, function () {
-      running = false;
-      setTimeout(pump, 40);
+    busy = true;
+    seqGroup(el, function () {
+      busy = false;
+      lastReveal = Date.now();
+      checkComplete();
+      setTimeout(maybeFill, 90);
     });
   }
 
-  if ("IntersectionObserver" in window) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (!e.isIntersecting) return;
-        io.unobserve(e.target);
-        e.target.dataset.hit = "1";
-        if (e.target.getBoundingClientRect().top < window.innerHeight * 0.55) {
-          e.target.dataset.deep = "1";
-        }
-        pump();
-      });
-    }, { rootMargin: "0px 0px -8% 0px", threshold: 0 });
-    seqGroups.forEach(function (g) { io.observe(g); });
-  } else {
-    seqGroups.forEach(function (g) { revealAll(g); g.dataset.done = "1"; });
+  function nearBottom() {
+    var docH = document.documentElement.scrollHeight;
+    return window.scrollY + window.innerHeight >= docH - 60;
   }
 
-  /* ---------- прогресс ---------- */
-  var bar = document.getElementById("bar");
-  var ticking = false;
-  function onScroll() {
-    if (ticking) return;
-    ticking = true;
+  function pageTooShort() {
+    return document.documentElement.scrollHeight <= window.innerHeight + 40;
+  }
+
+  function maybeFill() {
+    if (busy) return;
+    if (Date.now() < suppressUntil) return;
+    if (firstPending() < 0) { checkComplete(); return; }
+    if (pageTooShort() || nearBottom()) nextStep();
+  }
+
+  var paintQueued = false;
+  function queuePaint() {
+    if (paintQueued) return;
+    paintQueued = true;
     requestAnimationFrame(function () {
-      var h = document.documentElement.scrollHeight - window.innerHeight;
-      var p = h > 0 ? Math.min(1, Math.max(0, window.scrollY / h)) : 0;
-      if (bar) bar.style.width = (p * 100).toFixed(2) + "%";
-      ticking = false;
+      paintQueued = false;
+      paintProgress();
     });
   }
-  window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener("resize", onScroll);
-  onScroll();
+
+  window.addEventListener("scroll", function () {
+    queuePaint();
+    if (busy) return;
+    if (Date.now() < suppressUntil) return;
+    if (Date.now() - lastReveal < 320) return;
+    if (nearBottom()) nextStep();
+  }, { passive: true });
+
+  var resizeTimer = 0;
+  window.addEventListener("resize", function () {
+    queuePaint();
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () {
+      measureFinal();
+      if (pageTooShort()) maybeFill();
+    }, 150);
+  });
+
+  /* якоря: раскрываем всё до нужной главы */
+  function revealUpTo(index) {
+    for (var k = 0; k <= index && k < steps.length; k++) {
+      var el = steps[k];
+      if (el.dataset.done === "1") continue;
+      el.dataset.done = "1";
+      if (el.classList.contains("chapter")) {
+        el.classList.add("in");
+      } else {
+        revealAll(el);
+      }
+    }
+    var inds = document.querySelectorAll(".ind");
+    for (var j = 0; j < inds.length; j++) {
+      if (inds[j].parentNode) inds[j].parentNode.removeChild(inds[j]);
+    }
+    busy = false;
+    lastReveal = Date.now();
+    checkComplete();
+  }
+
+  function jumpToChapter(el) {
+    var idx = steps.indexOf(el);
+    if (idx < 0) return;
+    if (el.dataset.done !== "1") revealUpTo(idx);
+
+    var guard = 0;
+    while (guard < 5) {
+      var r = el.getBoundingClientRect();
+      var elBottom = r.bottom + window.scrollY;
+      var below = document.documentElement.scrollHeight - elBottom;
+      if (below >= window.innerHeight * 0.7) break;
+      var nx = firstPending();
+      if (nx < 0) break;
+      revealUpTo(nx);
+      guard++;
+    }
+    suppressUntil = Date.now() + 1500;
+  }
+
+  var chapterLinks = [].slice.call(document.querySelectorAll(".chapters a"));
+  chapterLinks.forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      var el = document.getElementById(a.getAttribute("href").slice(1));
+      if (!el) return;
+      if (el.dataset.done !== "1") {
+        e.preventDefault();
+        jumpToChapter(el);
+        setTimeout(function () {
+          el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+        }, 40);
+      }
+    });
+  });
+
+  if (location.hash) {
+    var hashEl = document.getElementById(location.hash.slice(1));
+    if (hashEl && hashEl.classList.contains("chapter")) {
+      setTimeout(function () {
+        jumpToChapter(hashEl);
+        hashEl.scrollIntoView({ block: "start" });
+      }, 60);
+    }
+  }
+
+  var skip = document.querySelector(".skip");
+  if (skip) {
+    skip.addEventListener("click", function (e) {
+      e.preventDefault();
+      revealUpTo(steps.length - 1);
+      var c = document.getElementById("contacts");
+      if (c) c.scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
+    });
+  }
+
+  setTimeout(function () { measureFinal(); maybeFill(); }, 60);
+  window.addEventListener("load", measureFinal);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function () { measureFinal(); });
+  }
 
   /* ---------- активный год ---------- */
   var chipLinks = [].slice.call(document.querySelectorAll(".chapters a"));
@@ -1394,16 +1524,18 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
   if (showAll) {
     showAll.addEventListener("click", function () {
       document.body.classList.add("all");
-      seqGroups.forEach(function (g) {
-        g.dataset.done = "1";
-        g.dataset.hit = "1";
-        g.classList.add("live");
-        g.querySelectorAll(".msg").forEach(function (m) { m.classList.add("on"); });
-        var ind = g.querySelector(".ind");
+      steps.forEach(function (el) {
+        el.dataset.done = "1";
+        if (el.classList.contains("chapter")) { el.classList.add("in"); return; }
+        el.classList.add("started");
+        el.classList.add("live");
+        el.querySelectorAll(".msg").forEach(function (m) { m.classList.add("on"); });
+        var ind = el.querySelector(".ind");
         if (ind && ind.parentNode) ind.parentNode.removeChild(ind);
       });
-      shown = totalMsgs;
-      updateCounter();
+      checkComplete();
+      measureFinal();
+      busy = false;
       showAll.textContent = "Показано";
       showAll.disabled = true;
     });
