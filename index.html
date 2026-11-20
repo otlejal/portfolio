@@ -181,21 +181,12 @@ a{color:inherit}
   box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 0 0 1px var(--accent-border) inset;
 }
 
-.hd-btn,.theme-btn{
+.theme-btn{
   border:1px solid var(--glass-brd);color:var(--ink-2);cursor:pointer;
   background-color:var(--glass);background-image:var(--sheen);
   backdrop-filter:var(--frost);-webkit-backdrop-filter:var(--frost);
   box-shadow:var(--glass-inset);
   transition:background-color .2s,border-color .2s,color .2s,transform .2s,box-shadow .2s;
-}
-.hd-btn{
-  flex:none;margin-left:6px;border-radius:999px;padding:8px 13px;
-  font-family:var(--font-body);font-size:.72rem;white-space:nowrap;
-}
-.hd-btn .lbl-short{display:none}
-.hd-btn:hover{background-color:var(--glass-strong);border-color:var(--accent-border);color:var(--ink);transform:translateY(-1px)}
-.hd-btn[disabled]{opacity:.6;cursor:default;transform:none}
-.theme-btn{
   width:36px;height:36px;flex:none;border-radius:50%;display:grid;place-items:center;padding:0;
 }
 .theme-btn:hover{background-color:var(--glass-strong);color:var(--ink);transform:translateY(-1px) rotate(-8deg)}
@@ -205,11 +196,6 @@ a{color:inherit}
 
 .bar{position:absolute;left:16px;right:16px;bottom:6px;height:2px;border-radius:2px;background:transparent;pointer-events:none}
 .bar i{display:block;height:100%;width:0;border-radius:2px;background:var(--accent);box-shadow:0 0 10px -2px var(--accent);transition:width .12s linear}
-
-/* measuring pass: invisible, used to know the final page height */
-.measuring [data-seq]:not(.started){display:flex!important}
-.measuring .chapter:not(.in){display:flex!important}
-.measuring .composer,.measuring .foot{display:block!important}
 
 /* ============ thread ============ */
 .thread{padding:clamp(20px,4vw,34px) 0 0}
@@ -243,9 +229,9 @@ a{color:inherit}
 .stack{display:flex;flex-direction:column;gap:6px;max-width:min(100%,540px);min-width:0;position:relative}
 .group.v .stack{align-items:flex-end}
 
-/* progressive feed: unrevealed steps do not exist in the flow */
-.js [data-seq]:not(.started){display:none}
-.js .chapter:not(.in){display:none}
+/* progressive feed: место под все реплики занято сразу, скрыто только визуально —
+   поэтому высота страницы постоянная и скролл никогда не упирается в конец */
+.js .chapter:not(.in){visibility:hidden}
 
 /* glass message */
 .msg{
@@ -400,13 +386,10 @@ a{color:inherit}
 @keyframes upload{0%{transform:translateX(-110%)}100%{transform:translateX(240%)}}
 
 /* sequenced reveal */
-.group[data-seq] .msg{opacity:0;transform:translateY(10px) scale(.985)}
-.group[data-seq] .msg.on{opacity:1;transform:none;transition:opacity .42s cubic-bezier(.2,.7,.2,1),transform .42s cubic-bezier(.2,.7,.2,1)}
+.group[data-seq] .msg{opacity:0;visibility:hidden;transform:translateY(10px) scale(.985)}
+.group[data-seq] .msg.on{opacity:1;visibility:visible;transform:none;transition:opacity .42s cubic-bezier(.2,.7,.2,1),transform .42s cubic-bezier(.2,.7,.2,1)}
 .group[data-seq] .ava{opacity:0;transform:scale(.9);transition:opacity .35s,transform .35s}
 .group[data-seq].live .ava{opacity:1;transform:none}
-body.all .group[data-seq] .msg{opacity:1!important;transform:none!important}
-body.all .group[data-seq] .ava{opacity:1!important;transform:none!important}
-body.all .ind{display:none!important}
 
 /* the reader's opening message lands on load */
 .group.first .msg{animation:land .55s .25s cubic-bezier(.2,.7,.2,1) both}
@@ -415,7 +398,6 @@ body.all .ind{display:none!important}
 /* generic reveal (chapters) */
 .rv{opacity:0;transform:translateY(10px)}
 .rv.in{opacity:1;transform:none;transition:opacity .55s cubic-bezier(.2,.7,.2,1),transform .55s cubic-bezier(.2,.7,.2,1)}
-body.all .rv{opacity:1!important;transform:none!important;transition:none!important}
 @media (prefers-reduced-motion:reduce){
   .rv{opacity:1;transform:none}
   .rv.in{transition:none}
@@ -426,8 +408,6 @@ body.all .rv{opacity:1!important;transform:none!important;transition:none!import
 }
 
 /* composer */
-.composer,.foot{display:none}
-body.complete .composer,body.complete .foot{display:block}
 .composer{max-width:var(--max);margin:clamp(38px,6vw,56px) auto 0;padding:0 var(--pad)}
 .box{
   display:flex;align-items:flex-end;gap:8px;
@@ -513,12 +493,9 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
 .note b{color:var(--ink);font-weight:600}
 
 /* ============ responsive ============ */
-@media (max-width:900px){
-  .hd-btn{margin-left:auto}
-}
-@media (max-width:780px){
+@media (max-width:560px){
   .chapters{display:none}
-  .hd-btn{margin-left:auto}
+  .theme-btn{margin-left:auto}
 }
 @media (max-width:680px){
   .hd{padding:8px var(--pad) 0}
@@ -526,7 +503,6 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
   .hd-who img{width:34px;height:34px}
   .hd-who b{font-size:.88rem}
   .hd-status{font-size:.6rem;letter-spacing:.06em}
-  .hd-btn{font-size:.68rem;padding:7px 10px}
   .theme-btn{width:34px;height:34px}
   .stack{max-width:100%}
   .msg{font-size:.93rem;backdrop-filter:blur(14px) saturate(170%);-webkit-backdrop-filter:blur(14px) saturate(170%)}
@@ -544,27 +520,18 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
   .stats{grid-template-columns:1fr 1fr;gap:10px}
   .stats .st:last-child{display:none}
   .pc-txt b{font-size:.96rem}
-  .hd-btn{padding:7px 11px}
-  .hd-btn .lbl-long{display:none}
-  .hd-btn .lbl-short{display:inline}
-}
-@media (max-width:360px){
-  .hd-status{display:none}
-  .hd-who b{font-size:.84rem}
-  .hd-btn{font-size:.64rem;padding:6px 8px}
 }
 
 /* ============ print ============ */
 @media print{
-  .hd,.composer,.foot,.skip,.ind,.hd-btn,.frame,.theme-btn{display:none!important}
+  .hd,.composer,.foot,.skip,.ind,.frame,.theme-btn{display:none!important}
   :root{color-scheme:light;--bg:#fff;--paper:#fff;--ink:#000;--ink-2:#333;--muted:#666;--line:#ddd;--line-2:#ccc}
   html,body{background:#fff}
   body::before{display:none}
   .rv{opacity:1!important;transform:none!important}
+  .rv,.chapter,.group[data-seq] .msg,.group[data-seq] .ava{visibility:visible!important}
   .group[data-seq] .msg,.group[data-seq] .ava{opacity:1!important;transform:none!important}
   .group.first .msg{animation:none}
-  .js [data-seq]:not(.started){display:flex!important}
-  .js .chapter:not(.in){display:flex!important}
   .thread{padding-top:0}
   .thread-in{max-width:100%;padding:0}
   .thread-in::before,.thread-in::after{display:none}
@@ -640,7 +607,6 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
       <a href="#now">сейчас</a>
     </nav>
 
-    <button class="hd-btn" id="showAll" type="button"><span class="lbl-long">Показать всё</span><span class="lbl-short">Всё</span></button>
     <button class="theme-btn" id="themeBtn" type="button" aria-label="Включить тёмную тему" title="Включить тёмную тему">
       <svg class="tm-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4l1.4-1.4M18 6l1.4-1.4"></path></svg>
       <svg class="tm-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1Z"></path></svg>
@@ -1233,32 +1199,33 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
   var y = document.getElementById("year");
   if (y) y.textContent = new Date().getFullYear();
 
-  /* ---------- последовательная выдача сообщений ---------- */
+  /* ---------- живая лента ----------
+     Место под все реплики занято с самого начала (они скрыты, но остаются в потоке).
+     Высота страницы постоянная, поэтому скролл никогда не упирается в конец,
+     а реплики «оживают» заранее — за ~0.45 экрана до того, как ты до них дойдёшь. */
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var steps = [].slice.call(document.querySelectorAll("[data-seq], .chapter"));
   var bar = document.getElementById("bar");
   var barWrap = bar ? bar.parentNode : null;
-  var busy = false;
-  var lastReveal = 0;
-  var suppressUntil = 0;
-  var finalHeight = 0;
 
   var DOTS = '<span class="ind-dots"><i></i><i></i><i></i></span>';
   var FILE_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5"/></svg>';
 
+  var AHEAD = 0.32;     /* на сколько экранов ниже сгиба начинаем оживлять */
+  var nextIdx = 0;      /* первый нераскрытый шаг */
+  var running = null;   /* шаг, который сейчас печатается */
+  var userScrolled = false;
+
   function paintProgress() {
     if (!bar) return;
-    var max = Math.max(0, finalHeight - window.innerHeight);
+    var max = document.documentElement.scrollHeight - window.innerHeight;
     var p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
     bar.style.width = (p * 100).toFixed(2) + "%";
     if (barWrap) barWrap.setAttribute("aria-valuenow", String(Math.round(p * 100)));
   }
 
-  function measureFinal() {
-    document.body.classList.add("measuring");
-    finalHeight = document.documentElement.scrollHeight;
-    document.body.classList.remove("measuring");
-    paintProgress();
+  function stepTop(el) {
+    return el.getBoundingClientRect().top + window.scrollY;
   }
 
   function makeIndicator(stack) {
@@ -1275,63 +1242,51 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
     }, delay);
   }
 
-  function revealAll(g) {
-    g.classList.add("started");
-    var msgs = g.querySelectorAll(".msg");
-    for (var i = 0; i < msgs.length; i++) msgs[i].classList.add("on");
-    g.classList.add("live");
+  function dropIndicators() {
+    var inds = document.querySelectorAll(".ind");
+    for (var i = 0; i < inds.length; i++) {
+      if (inds[i].parentNode) inds[i].parentNode.removeChild(inds[i]);
+    }
   }
 
-  function seqGroup(g, done) {
-    if (g.dataset.done === "1") { done(); return; }
-    g.dataset.done = "1";
+  function revealGroup(g) {
+    g.classList.add("started");
+    g.classList.add("live");
+    var msgs = g.querySelectorAll(".msg");
+    for (var i = 0; i < msgs.length; i++) msgs[i].classList.add("on");
+  }
+
+  /* instant — показать сразу, без «печатает…» */
+  function playGroup(g, instant, done) {
+    g.dataset.state = "done";
     g.classList.add("started");
 
     var stack = g.querySelector(".stack");
-    if (!stack) { done(); return; }
-    var msgs = [].slice.call(stack.querySelectorAll(".msg"));
+    var msgs = stack ? [].slice.call(stack.querySelectorAll(".msg")) : [];
     var fromArtur = g.classList.contains("a");
     var isIntro = g.id === "boot";
 
-    if (reduce || !fromArtur) {
-      revealAll(g);
-      done();
+    if (instant || reduce || !stack || !msgs.length || !fromArtur) {
+      revealGroup(g);
+      if (done) done();
       return;
     }
 
     var ind = makeIndicator(stack);
-
-    if (isIntro) {
-      ind.innerHTML = DOTS;
-      ind.style.top = "0px";
-      ind.classList.add("show");
-      setTimeout(function () {
-        ind.classList.remove("show");
-        var k = 0;
-        (function next() {
-          if (k >= msgs.length) { dropIndicator(ind, 220); done(); return; }
-          msgs[k].classList.add("on");
-          g.classList.add("live");
-          k++;
-          setTimeout(next, k === 1 ? 200 : 150);
-        })();
-      }, reduce ? 0 : 240);
-      return;
-    }
-
     var i = 0;
-    function step() {
+
+    (function tick() {
       if (i >= msgs.length) {
         ind.classList.remove("show");
-        dropIndicator(ind, 320);
-        done();
+        dropIndicator(ind, 220);
+        if (done) done();
         return;
       }
 
       var m = msgs[i];
       var label = m.getAttribute("data-send");
       var isFile = !!label || m.classList.contains("attach");
-      var wait = isFile ? 760 : 600;
+      var wait = isIntro ? 320 : (isFile ? 540 : 400);
 
       ind.innerHTML = isFile
         ? '<span class="ind-file">' + FILE_ICON + "<span>" + (label || "отправляю файл") + "</span></span>"
@@ -1344,132 +1299,141 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
         m.classList.add("on");
         g.classList.add("live");
         i++;
-        setTimeout(step, isFile ? 160 : 240);
+        setTimeout(tick, isFile ? 130 : 150);
       }, wait);
+    })();
+  }
+
+  /* выдаём шаги по одному, но только на опережение; ничего не ждёт скролла */
+  function pump() {
+    /* если очередь отстала от прокрутки и её голова уже на экране — показываем сразу */
+    if (userScrolled) {
+      var head = steps[nextIdx];
+      if (head && !head.classList.contains("chapter") &&
+          stepTop(head) < window.scrollY + window.innerHeight - 40) {
+        flushVisible();
+      }
     }
-    step();
-  }
+    if (running) return;
 
-  function firstPending() {
-    for (var i = 0; i < steps.length; i++) {
-      if (steps[i].dataset.done !== "1") return i;
+    while (nextIdx < steps.length) {
+      var s = steps[nextIdx];
+      if (s.classList.contains("chapter")) {
+        if (!s.classList.contains("in")) break;
+        nextIdx++;
+        continue;
+      }
+      if (s.dataset.state !== "done") break;
+      nextIdx++;
     }
-    return -1;
-  }
+    if (nextIdx >= steps.length) return;
 
-  function checkComplete() {
-    if (firstPending() < 0) document.body.classList.add("complete");
-  }
-
-  function nextStep() {
-    if (busy) return;
-    var idx = firstPending();
-    if (idx < 0) { checkComplete(); return; }
-    var el = steps[idx];
+    var el = steps[nextIdx];
+    var limit = window.scrollY + window.innerHeight * (1 + AHEAD);
+    if (stepTop(el) > limit) return;
 
     if (el.classList.contains("chapter")) {
-      el.dataset.done = "1";
       el.classList.add("in");
-      setTimeout(maybeFill, 60);
+      nextIdx++;
+      pump();
       return;
     }
 
-    busy = true;
-    seqGroup(el, function () {
-      busy = false;
-      lastReveal = Date.now();
-      checkComplete();
-      setTimeout(maybeFill, 90);
+    /* если шаг уже на экране (быстрый флик) — не заставляем смотреть на «печатает…» */
+    var instant = userScrolled && stepTop(el) < window.scrollY + window.innerHeight - 120;
+
+    running = el;
+    playGroup(el, instant, function () {
+      if (running !== el) return;
+      running = null;
+      nextIdx++;
+      pump();
     });
   }
 
-  function nearBottom() {
-    var docH = document.documentElement.scrollHeight;
-    return window.scrollY + window.innerHeight >= docH - 60;
+  /* резкий флик/перетаскивание ползунка: показываем всё, что уже на экране, сразу */
+  function flushVisible() {
+    var bottom = window.scrollY + window.innerHeight - 40;
+    var list = [];
+    for (var i = 0; i < steps.length; i++) {
+      var s = steps[i];
+      if (stepTop(s) >= bottom) break;
+      if (s.classList.contains("chapter")) {
+        if (!s.classList.contains("in")) list.push(s);
+      } else if (s.dataset.state !== "done") {
+        list.push(s);
+      }
+    }
+    if (!list.length) return;
+    running = null;
+    dropIndicators();
+    for (var j = 0; j < list.length; j++) {
+      var el = list[j];
+      if (el.classList.contains("chapter")) el.classList.add("in");
+      else { el.dataset.state = "done"; revealGroup(el); }
+    }
   }
 
-  function pageTooShort() {
-    return document.documentElement.scrollHeight <= window.innerHeight * 1.25;
+  var lastY = 0;
+  var frameQueued = false;
+  function onFrame() {
+    frameQueued = false;
+    paintProgress();
+    var y = window.scrollY;
+    var jump = Math.abs(y - lastY);
+    lastY = y;
+    if (userScrolled && jump > window.innerHeight * 0.5) flushVisible();
+    pump();
+    updateChips();
   }
-
-  function maybeFill() {
-    if (busy) return;
-    if (Date.now() < suppressUntil) return;
-    if (firstPending() < 0) { checkComplete(); return; }
-    if (pageTooShort() || nearBottom()) nextStep();
-  }
-
-  var paintQueued = false;
-  function queuePaint() {
-    if (paintQueued) return;
-    paintQueued = true;
-    requestAnimationFrame(function () {
-      paintQueued = false;
-      paintProgress();
-    });
+  function requestFrame() {
+    if (frameQueued) return;
+    frameQueued = true;
+    requestAnimationFrame(onFrame);
   }
 
   window.addEventListener("scroll", function () {
-    queuePaint();
-    if (busy) return;
-    if (Date.now() < suppressUntil) return;
-    if (Date.now() - lastReveal < 320) return;
-    if (nearBottom()) nextStep();
+    userScrolled = true;
+    requestFrame();
   }, { passive: true });
 
   var resizeTimer = 0;
   window.addEventListener("resize", function () {
-    queuePaint();
+    requestFrame();
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(function () {
-      measureFinal();
-      if (pageTooShort()) maybeFill();
-    }, 150);
+    resizeTimer = setTimeout(requestFrame, 180);
   });
 
-  /* якоря: раскрываем всё до нужной главы */
-  function revealUpTo(index) {
-    for (var k = 0; k <= index && k < steps.length; k++) {
-      var el = steps[k];
-      if (el.dataset.done === "1") continue;
-      el.dataset.done = "1";
-      if (el.classList.contains("chapter")) {
-        el.classList.add("in");
-      } else {
-        revealAll(el);
-      }
-    }
-    var inds = document.querySelectorAll(".ind");
-    for (var j = 0; j < inds.length; j++) {
-      if (inds[j].parentNode) inds[j].parentNode.removeChild(inds[j]);
-    }
-    busy = false;
-    lastReveal = Date.now();
-    checkComplete();
-  }
-
-  function jumpToChapter(el) {
+  /* раскрыть всё до шага (для переходов по годам) */
+  function revealBefore(el) {
     var idx = steps.indexOf(el);
     if (idx < 0) return;
-    if (el.dataset.done !== "1") revealUpTo(idx);
-
-    var guard = 0;
-    while (guard < 12) {
-      var r = el.getBoundingClientRect();
-      var elTop = r.top + window.scrollY;
-      var needed = elTop + window.innerHeight - 88;
-      if (document.documentElement.scrollHeight >= needed) break;
-      var nx = firstPending();
-      if (nx < 0) break;
-      revealUpTo(nx);
-      guard++;
+    for (var i = 0; i < idx; i++) {
+      var s = steps[i];
+      if (s.classList.contains("chapter")) {
+        s.classList.add("in");
+      } else if (s.dataset.state !== "done") {
+        s.dataset.state = "done";
+        revealGroup(s);
+      }
     }
-    suppressUntil = Date.now() + 1500;
+    running = null;
+    dropIndicators();
   }
 
   function scrollToStep(el) {
-    var top = el.getBoundingClientRect().top + window.scrollY - 88;
-    window.scrollTo({ top: top, behavior: reduce ? "auto" : "smooth" });
+    var top = el.getBoundingClientRect().top + window.scrollY;
+    /* пока не добавлен .in, у .rv висит translateY(10px) — меряем без него */
+    if (el.classList.contains("rv") && !el.classList.contains("in")) {
+      var tf = el.style.transform, tr = el.style.transition;
+      el.style.transition = "none";
+      el.style.transform = "none";
+      top = el.getBoundingClientRect().top + window.scrollY;
+      el.classList.add("in");
+      el.style.transform = tf;
+      el.style.transition = tr;
+    }
+    window.scrollTo({ top: top - 88, behavior: reduce ? "auto" : "smooth" });
   }
 
   var chapterLinks = [].slice.call(document.querySelectorAll(".chapters a"));
@@ -1477,11 +1441,10 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
     a.addEventListener("click", function (e) {
       var el = document.getElementById(a.getAttribute("href").slice(1));
       if (!el) return;
-      if (el.dataset.done !== "1") {
-        e.preventDefault();
-        jumpToChapter(el);
-        setTimeout(function () { scrollToStep(el); }, 40);
-      }
+      e.preventDefault();
+      revealBefore(el);
+      scrollToStep(el);
+      requestFrame();
     });
   });
 
@@ -1489,9 +1452,10 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
     var hashEl = document.getElementById(location.hash.slice(1));
     if (hashEl && hashEl.classList.contains("chapter")) {
       setTimeout(function () {
-        jumpToChapter(hashEl);
+        revealBefore(hashEl);
         scrollToStep(hashEl);
-      }, 60);
+        requestFrame();
+      }, 80);
     }
   }
 
@@ -1499,56 +1463,49 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
   if (skip) {
     skip.addEventListener("click", function (e) {
       e.preventDefault();
-      revealUpTo(steps.length - 1);
-      var c = document.getElementById("contacts");
-      if (c) {
-        var top = c.getBoundingClientRect().top + window.scrollY - 88;
-        window.scrollTo({ top: top, behavior: reduce ? "auto" : "smooth" });
+      for (var i = 0; i < steps.length; i++) {
+        var s = steps[i];
+        if (s.classList.contains("chapter")) s.classList.add("in");
+        else if (s.dataset.state !== "done") { s.dataset.state = "done"; revealGroup(s); }
       }
+      running = null;
+      nextIdx = steps.length;
+      dropIndicators();
+      var c = document.getElementById("contacts");
+      if (c) scrollToStep(c);
+      requestFrame();
     });
   }
 
-  setTimeout(function () { measureFinal(); maybeFill(); }, 60);
-  window.addEventListener("load", measureFinal);
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(function () { measureFinal(); });
+  /* перезагрузка на середине: браузер восстанавливает позицию — не оставляем пустоту */
+  function catchUp() {
+    if (window.scrollY > 4) {
+      userScrolled = true;
+      flushVisible();
+      pump();
+    }
   }
+
+  setTimeout(function () { paintProgress(); catchUp(); pump(); updateChips(); }, 520);
+  window.addEventListener("load", function () { paintProgress(); catchUp(); updateChips(); });
 
   /* ---------- активный год ---------- */
   var chipLinks = [].slice.call(document.querySelectorAll(".chapters a"));
   var chapters = [].slice.call(document.querySelectorAll(".chapter"));
-  if ("IntersectionObserver" in window && chapters.length) {
-    var spy = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (!e.isIntersecting) return;
-        chipLinks.forEach(function (a) {
-          a.classList.toggle("on", a.getAttribute("href") === "#" + e.target.id);
-        });
-      });
-    }, { rootMargin: "-45% 0px -50% 0px" });
-    chapters.forEach(function (c) { spy.observe(c); });
-  }
 
-  /* ---------- показать всё ---------- */
-  var showAll = document.getElementById("showAll");
-  if (showAll) {
-    showAll.addEventListener("click", function () {
-      document.body.classList.add("all");
-      steps.forEach(function (el) {
-        el.dataset.done = "1";
-        if (el.classList.contains("chapter")) { el.classList.add("in"); return; }
-        el.classList.add("started");
-        el.classList.add("live");
-        el.querySelectorAll(".msg").forEach(function (m) { m.classList.add("on"); });
-        var ind = el.querySelector(".ind");
-        if (ind && ind.parentNode) ind.parentNode.removeChild(ind);
-      });
-      checkComplete();
-      measureFinal();
-      busy = false;
-      showAll.innerHTML = '<span class="lbl-long">Показано</span><span class="lbl-short">Готово</span>';
-      showAll.disabled = true;
-    });
+  function updateChips() {
+    if (!chapters.length) return;
+    var line = window.scrollY + window.innerHeight * 0.34;
+    var active = null;
+    for (var i = 0; i < chapters.length; i++) {
+      if (stepTop(chapters[i]) <= line) active = chapters[i];
+      else break;
+    }
+    for (var j = 0; j < chipLinks.length; j++) {
+      var a = chipLinks[j];
+      var on = !!active && a.getAttribute("href") === "#" + active.id;
+      if (a.classList.contains("on") !== on) a.classList.toggle("on", on);
+    }
   }
 
   /* ---------- спекуляр по стеклу ---------- */
@@ -1644,7 +1601,7 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
 </script>
 
 <noscript>
-  <style>.rv{opacity:1!important;transform:none!important}.group[data-seq] .msg,.group[data-seq] .ava{opacity:1!important;transform:none!important}.ind{display:none!important}</style>
+  <style>.rv{opacity:1!important;transform:none!important}.group[data-seq] .msg{opacity:1!important;visibility:visible!important;transform:none!important}.group[data-seq] .ava{opacity:1!important;transform:none!important}.ind{display:none!important}</style>
 </noscript>
 
 </body>
