@@ -150,14 +150,14 @@ a{color:inherit}
 .hd-in{
   pointer-events:auto;position:relative;
   max-width:var(--max);margin:0 auto;
-  height:60px;display:flex;align-items:center;gap:10px;justify-content: space-around;
+  height:60px;display:flex;align-items:center;gap:10px;
   padding:0 10px 0 12px;border-radius:19px;
   background-color:var(--hd-bg);background-image:var(--sheen);
   border:1px solid var(--glass-brd);
   backdrop-filter:var(--frost);-webkit-backdrop-filter:var(--frost);
   box-shadow:var(--glass-shadow),var(--glass-inset);
 }
-.hd-who{display:flex;align-items:center;gap:10px;text-decoration:none;min-width:0}
+.hd-who{display:flex;align-items:center;gap:10px;text-decoration:none;min-width:0;overflow:hidden}
 .hd-who img{width:38px;height:38px;border-radius:50%;object-fit:cover;object-position:50% 25%;border:1px solid var(--glass-brd);flex:none}
 .hd-who b{display:block;font-family:var(--font-display);font-weight:600;font-size:.94rem;letter-spacing:-.015em;line-height:1.2;white-space:nowrap}
 .hd-status{
@@ -192,6 +192,7 @@ a{color:inherit}
   flex:none;margin-left:6px;border-radius:999px;padding:8px 13px;
   font-family:var(--font-body);font-size:.72rem;white-space:nowrap;
 }
+.hd-btn .lbl-short{display:none}
 .hd-btn:hover{background-color:var(--glass-strong);border-color:var(--accent-border);color:var(--ink);transform:translateY(-1px)}
 .hd-btn[disabled]{opacity:.6;cursor:default;transform:none}
 .theme-btn{
@@ -517,7 +518,7 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
 }
 @media (max-width:780px){
   .chapters{display:none}
-  .hd-btn{margin-left:0}
+  .hd-btn{margin-left:auto}
 }
 @media (max-width:680px){
   .hd{padding:8px var(--pad) 0}
@@ -543,6 +544,9 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
   .stats{grid-template-columns:1fr 1fr;gap:10px}
   .stats .st:last-child{display:none}
   .pc-txt b{font-size:.96rem}
+  .hd-btn{padding:7px 11px}
+  .hd-btn .lbl-long{display:none}
+  .hd-btn .lbl-short{display:inline}
 }
 @media (max-width:360px){
   .hd-status{display:none}
@@ -636,7 +640,7 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
       <a href="#now">сейчас</a>
     </nav>
 
-    <button class="hd-btn" id="showAll" type="button">Показать всё</button>
+    <button class="hd-btn" id="showAll" type="button"><span class="lbl-long">Показать всё</span><span class="lbl-short">Всё</span></button>
     <button class="theme-btn" id="themeBtn" type="button" aria-label="Включить тёмную тему" title="Включить тёмную тему">
       <svg class="tm-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4l1.4-1.4M18 6l1.4-1.4"></path></svg>
       <svg class="tm-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1Z"></path></svg>
@@ -1385,7 +1389,7 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
   }
 
   function pageTooShort() {
-    return document.documentElement.scrollHeight <= window.innerHeight + 40;
+    return document.documentElement.scrollHeight <= window.innerHeight * 1.25;
   }
 
   function maybeFill() {
@@ -1450,17 +1454,22 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
     if (el.dataset.done !== "1") revealUpTo(idx);
 
     var guard = 0;
-    while (guard < 5) {
+    while (guard < 12) {
       var r = el.getBoundingClientRect();
-      var elBottom = r.bottom + window.scrollY;
-      var below = document.documentElement.scrollHeight - elBottom;
-      if (below >= window.innerHeight * 0.7) break;
+      var elTop = r.top + window.scrollY;
+      var needed = elTop + window.innerHeight - 88;
+      if (document.documentElement.scrollHeight >= needed) break;
       var nx = firstPending();
       if (nx < 0) break;
       revealUpTo(nx);
       guard++;
     }
     suppressUntil = Date.now() + 1500;
+  }
+
+  function scrollToStep(el) {
+    var top = el.getBoundingClientRect().top + window.scrollY - 88;
+    window.scrollTo({ top: top, behavior: reduce ? "auto" : "smooth" });
   }
 
   var chapterLinks = [].slice.call(document.querySelectorAll(".chapters a"));
@@ -1471,9 +1480,7 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
       if (el.dataset.done !== "1") {
         e.preventDefault();
         jumpToChapter(el);
-        setTimeout(function () {
-          el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
-        }, 40);
+        setTimeout(function () { scrollToStep(el); }, 40);
       }
     });
   });
@@ -1483,7 +1490,7 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
     if (hashEl && hashEl.classList.contains("chapter")) {
       setTimeout(function () {
         jumpToChapter(hashEl);
-        hashEl.scrollIntoView({ block: "start" });
+        scrollToStep(hashEl);
       }, 60);
     }
   }
@@ -1494,7 +1501,10 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
       e.preventDefault();
       revealUpTo(steps.length - 1);
       var c = document.getElementById("contacts");
-      if (c) c.scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
+      if (c) {
+        var top = c.getBoundingClientRect().top + window.scrollY - 88;
+        window.scrollTo({ top: top, behavior: reduce ? "auto" : "smooth" });
+      }
     });
   }
 
@@ -1536,7 +1546,7 @@ dialog::backdrop{background:var(--backdrop);backdrop-filter:blur(6px);-webkit-ba
       checkComplete();
       measureFinal();
       busy = false;
-      showAll.textContent = "Показано";
+      showAll.innerHTML = '<span class="lbl-long">Показано</span><span class="lbl-short">Готово</span>';
       showAll.disabled = true;
     });
   }
